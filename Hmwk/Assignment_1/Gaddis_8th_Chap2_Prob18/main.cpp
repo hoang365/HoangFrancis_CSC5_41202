@@ -1,8 +1,8 @@
 /* 
      
      Author: Francis Hoang
-     Created on January 6, 2016, 9:41 AM
-     Purpose: Calculated Military Budget
+     Created on January 6, 2016, 10:05 AM
+     Purpose:Calculate number of energy drinkers
  */
 //System Libraries
 #include <iostream>
