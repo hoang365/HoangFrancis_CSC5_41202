@@ -21,7 +21,7 @@ const char cnvPerc=100;
 
 int main(int argc, char** argv) {
     //Declare and initialize variables
-    float milBdgt=600e9f;
+    float milBdgt=6e11f;
     float fedBdgt=3.8e12f;
     float percMil;
          
