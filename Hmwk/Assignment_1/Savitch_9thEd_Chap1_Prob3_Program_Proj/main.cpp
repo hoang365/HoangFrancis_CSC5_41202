@@ -29,11 +29,11 @@ int main(int argc, char** argv) {
     unsigned short  total;      //total
    
     //Input the number of coins
-    cout<<"How many quarters do you have 0-9"<<endl;
+    cout<<"How many quarters do you have?"<<endl;
     cin>>nQrts;
-    cout<<"How many dimes do you have 0-9"<<endl;
+    cout<<"How many dimes do you have?"<<endl;
     cin>>nDim;
-    cout<<"How many nickels do you have 0-9"<<endl;
+    cout<<"How many nickels do you have?"<<endl;
     cin>>nNic;
     //Calculate the total
     total = nQrts*cnvQrt+nDim*cnvDim+nNic*cnvNic;
