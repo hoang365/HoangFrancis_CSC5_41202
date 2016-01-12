@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
         guess = (guess+r)/2;
     }
     //Output the results
-    cout<<"The Babylonians believe the square root to be "<<r<<endl;
+    cout<<"The Babylonians believe the square root to be "<<guess<<endl;
     //Exit stage right
     return 0;
 }
