@@ -23,8 +23,8 @@ int main(int argc, char** argv) {
     //Declare and initialize variables
     float guess; //the initial guess
     float r;   //square root
-    int n;     //number
-    int count = 0; //number of times ran
+    unsigned int n;     //number
+    unsigned int count = 0; //number of times ran
     //Calculate or map inputs to outputs
     //cout<<fixed<<setprecision(2)<<showpoint;
     cout<<"Enter the number to find the square root of: ";

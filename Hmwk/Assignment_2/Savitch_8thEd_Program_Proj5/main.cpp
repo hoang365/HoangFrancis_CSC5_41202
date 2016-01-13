@@ -38,25 +38,18 @@ int main(int argc, char** argv) {
         remain = maxCap - numPeop;
         if(remain == 1){
             cout<<"1 more person may attend."<<endl;
-        }
-        else if(remain == 0){
+        }else if(remain == 0){
             cout<<"The room is full."<<endl;
+        }else{
+            cout<<remain<<" more people may attend."<<endl;
         }
-        else{
-        cout<<remain<<" more people may attend."<<endl;
-        }
-   }
-    else{
+   }else{
         cout<<"The meeting cannot be held due to fire regulations."<<endl;
         remain = numPeop - maxCap;
         if(remain == 1){
             cout<<"1 person must leave in order to meet regulations."<<endl;
-        }
-        else if(remain == 0){
-            cout<<"The room is full."<<endl;
-        }
-        else {
-        cout<<remain<<" people must leave in order to meet regulations."<<endl;
+        }else {
+            cout<<remain<<" people must leave in order to meet regulations."<<endl;
         }
     }
     //Exit stage right
