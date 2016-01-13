@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
     
     
     //Output the results
-    cout<<"Goodbye";
+    cout<<
     //Exit stage right
     return 0;
 }
