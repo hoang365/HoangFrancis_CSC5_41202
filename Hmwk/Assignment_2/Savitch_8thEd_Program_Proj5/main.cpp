@@ -34,23 +34,29 @@ int main(int argc, char** argv) {
     
     //Output the results
    if(numPeop <= maxCap){
-        cout<<"It is legal to hold the meeting"<<endl;
+        cout<<"It is legal to hold the meeting."<<endl;
         remain = maxCap - numPeop;
         if(remain == 1){
-            cout<<"1 more person may attend"<<endl;
+            cout<<"1 more person may attend."<<endl;
+        }
+        else if(remain == 0){
+            cout<<"The room is full."<<endl;
         }
         else{
-        cout<<remain<<" more people may attend"<<endl;
+        cout<<remain<<" more people may attend."<<endl;
         }
-    }
+   }
     else{
-        cout<<"The meeting cannot be held due to fire regulations"<<endl;
+        cout<<"The meeting cannot be held due to fire regulations."<<endl;
         remain = numPeop - maxCap;
         if(remain == 1){
-            cout<<"1 persons must leave in order to meet regulations"<<endl;
+            cout<<"1 person must leave in order to meet regulations."<<endl;
+        }
+        else if(remain == 0){
+            cout<<"The room is full."<<endl;
         }
         else {
-        cout<<remain<<" people must leave in order to meet regulations"<<endl;
+        cout<<remain<<" people must leave in order to meet regulations."<<endl;
         }
     }
     //Exit stage right
