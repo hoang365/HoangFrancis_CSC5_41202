@@ -12,11 +12,7 @@ using namespace std;
 //User Libraries
 
 //Global Constants
-const int KMOUSE = 5; //5 grams of artificial sweetener needed to kill mouse
-const int MMASS = 35; //mouse is 35 grams
-const int DIETER = 45400; //weight of 100 lb person in grams
-const int SODA = 350; //single can of soda in grams
-const float ASWEET = .001; //amount of artificial sweetener in soda
+
 //Function prototypes
 
 //Execution begins here
@@ -25,6 +21,11 @@ const float ASWEET = .001; //amount of artificial sweetener in soda
 
 int main(int argc, char** argv) {
     //Declare and initialize variables
+    const int KMOUSE = 5; //5 grams of artificial sweetener needed to kill mouse
+    const int MMASS = 35; //mouse is 35 grams
+   
+    const int SODA = 350; //single can of soda in grams
+    const float ASWEET = .001; //amount of artificial sweetener in soda
     float weight; //weigh to stop diet at
     char input; //user's input to stop the program
     float kill; //amount of sweetener that will kill you
@@ -39,7 +40,7 @@ int main(int argc, char** argv) {
     cout<<kill<<" grams of artificial sweetener will kill you"<<endl;
     cout<<"There is "<<sSweet<<" grams of artificial sweetener in one can of soda."<<endl;
     nSoda = kill/sSweet;
-    cout<<"Drinking "<<nSoda<<" cans of soda will kill you"<<endl;
+    cout<<"Drinking "<<nSoda<<" cans of soda will definitely kill you"<<endl;
     
     cout<<"Enter y if you would like to repeat this, otherwise enter any key"<<endl;
     cin>>input;
