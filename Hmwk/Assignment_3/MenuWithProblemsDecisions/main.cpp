@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
         cout<<"Type 1 to Display Problem 1"<<endl;
         cout<<"Type 2 to Display Problem 2"<<endl;
         cout<<"Type 3 to Display Problem 3"<<endl;
+        cout<<"Type 4 to Display Problem 4"<<endl;
         cout<<"Type anything else to exit "<<endl;
         cin>>nSoltn;
     
@@ -125,6 +126,49 @@ int main(int argc, char** argv) {
 
                         cout<<"The approximate value of pi calculated to "<<n<<" terms is "<<pi<<endl<<endl;
                     break;
+                }
+                case 4:{
+                    cout<<"Solution to Savitch 9thEd Chap3 Prac Prob2"<<endl;
+                    cout<<"Calculating credit payments"<<endl<<endl;
+                    float interst, total, minPay; //interest, total amount due, minimum payment due
+                    float balance; //account balance
+                    //Calculate or map inputs to outputs
+                    cout<<fixed<<setprecision(2)<<showpoint;
+                    cout<<"Input the account balance"<<endl;
+                    cin>>balance;
+
+                    if(balance>1000){
+                        interst = (balance-1000)*.01 + .015*1000;
+                        total = balance+interst;
+                        if(total <=10){
+                            minPay = total;
+                        }else{
+                            if(.1*total>10){
+                                minPay = .1*total;
+                            }else{
+                                minPay = 10;
+                            }
+
+                        }
+
+                    }else{
+                        interst = balance*.015;
+                        total = balance+interst;
+                        if(total <=10){
+                            minPay = total;
+                        }else{
+                            if(.1*total>10){
+                                minPay = .1*total;
+                            }else{
+                                minPay = 10;
+                            }
+
+                        }
+                    }
+                    //Output the results
+                    cout<<"Interest due: $"<<interst<<endl;
+                    cout<<"Total amount due: $"<<total<<endl;
+                    cout<<"Minimum payment due: $"<<minPay;
                 }
                 default:{
                     cout<<"Exiting the Program"<<endl;

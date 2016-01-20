@@ -21,12 +21,45 @@ using namespace std;
 
 int main(int argc, char** argv) {
     //Declare and initialize variables
-     
+    float interst, total, minPay; //interest, total amount due, minimum payment due
+    float balance; //account balance
     //Calculate or map inputs to outputs
     cout<<fixed<<setprecision(2)<<showpoint;
-   
-    //Output the results
+    cout<<"Input the account balance"<<endl;
+    cin>>balance;
     
+    if(balance>1000){
+        interst = (balance-1000)*.01 + .015*1000;
+        total = balance+interst;
+        if(total <=10){
+            minPay = total;
+        }else{
+            if(.1*total>10){
+                minPay = .1*total;
+            }else{
+                minPay = 10;
+            }
+            
+        }
+        
+    }else{
+        interst = balance*.015;
+        total = balance+interst;
+        if(total <=10){
+            minPay = total;
+        }else{
+            if(.1*total>10){
+                minPay = .1*total;
+            }else{
+                minPay = 10;
+            }
+            
+        }
+    }
+    //Output the results
+    cout<<"Interest due: $"<<interst<<endl;
+    cout<<"Total amount due: $"<<total<<endl;
+    cout<<"Minimum payment due: $"<<minPay;
     //Exit stage right
     return 0;
 }
