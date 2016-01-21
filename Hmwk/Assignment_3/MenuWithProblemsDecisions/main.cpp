@@ -16,7 +16,7 @@ using namespace std;
 //User Libraries
 
 //Global Constants
-
+const float PI = 3.1415927f;
 //Function prototypes
 
 //Execution begins here
@@ -33,11 +33,15 @@ int main(int argc, char** argv) {
         
     
         cout<<"Assignment 3 Problem Set"<<endl;
-        cout<<"Type 1 to Display Problem 1"<<endl;
-        cout<<"Type 2 to Display Problem 2"<<endl;
-        cout<<"Type 3 to Display Problem 3"<<endl;
-        cout<<"Type 4 to Display Problem 4"<<endl;
-        cout<<"Type 5 to Display Problem 5"<<endl;
+        cout<<"Type 1 to Display Problem 1"<<endl; //Fibonacci
+        cout<<"Type 2 to Display Problem 2"<<endl; //e to the power of x
+        cout<<"Type 3 to Display Problem 3"<<endl; //calculating pi
+        cout<<"Type 4 to Display Problem 4"<<endl; //calculating credit payments
+        cout<<"Type 5 to Display Problem 5"<<endl; // Rock Paper Scissors
+        cout<<"Type 6 to Display Problem 6"<<endl; //Find your astrological sign
+        cout<<"Type 7 to Display Problem 7"<<endl;//Prime numbers 3-100
+        cout<<"Type 8 to Display Problem 8"<<endl; //Check buoyancy of spheres
+        cout<<"Type 9 to Display Problem 9"<<endl; //Find the equivalent temperature of Celsius and Fahrenheit
         cout<<"Type anything else to exit "<<endl;
         cin>>nSoltn;
     
@@ -139,19 +143,19 @@ int main(int argc, char** argv) {
                         //Declare and initialize variables
                         float interst, total, minPay; //interest, total amount due, minimum payment due
                         float balance; //account balance
-                        //Calculate or map inputs to outputs
+                        //Input the balance
                         cout<<fixed<<setprecision(2)<<showpoint;
                         cout<<"Input the account balance"<<endl;
                         cin>>balance;
-
-                        if(balance>1000){
-                            interst = (balance-1000)*.01 + .015*1000;
+                        
+                        if(balance>1000){   //Checks if balance is greater than 1000
+                            interst = (balance-1000.0f)*.01f + .015*1000;   //initial 1000*1.5%, remaining amount*1%
                             total = balance+interst;
                             if(total <=10){
                                 minPay = total;
                             }else{
-                                if(.1*total>10){
-                                    minPay = .1*total;
+                                if(.1*total>10){                            //minimum payment is 10% of the total, or $10, whichever is higher
+                                    minPay = .1f*total;
                                 }else{
                                     minPay = 10;
                                 }
@@ -159,13 +163,13 @@ int main(int argc, char** argv) {
                             }
 
                         }else{
-                            interst = balance*.015;
+                            interst = balance*.015f;
                             total = balance+interst;
                             if(total <=10){
                                 minPay = total;
                             }else{
                                 if(.1*total>10){
-                                    minPay = .1*total;
+                                    minPay = .1f*total;
                                 }else{
                                     minPay = 10;
                                 }
@@ -263,9 +267,6 @@ int main(int argc, char** argv) {
                     cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob3"<<endl;
                     cout<<endl<<"Astrology"<<endl<<endl;
 
-
-
-
                     //Loop until user wants to quit
                     char qstion; //Question to repeat
                     do{
@@ -282,7 +283,7 @@ int main(int argc, char** argv) {
                         cout<<"Enter your birthday"<<endl;
                         cin>>day;
 
-                        //Calculate or map inputs to outputs
+                        //Checks birthday and returns astrological sign
                         switch(month){
                             case 1:{
                                 while(day>31){
@@ -556,6 +557,73 @@ int main(int argc, char** argv) {
                         cout<<endl<<"Do you want to repeat?"<<endl;
                         cin>>qstion;
                     }while(toupper(qstion) == 'Y');
+                }
+                case 7:{
+                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob5"<<endl;
+                    cout<<endl<<"Calculating Prime Numbers for 3 to 100"<<endl<<endl;
+
+                    //declare and initialize variables
+                    unsigned int prime = 3; //prime number
+                    unsigned int n = 2;     
+                    //print out prime numbers from 3 to 100
+                    while (prime <=100){
+                        for ( int i = 2; i <= prime; i++){
+                            n = i;
+                            if(n == prime ){
+                                cout<<prime<<endl;
+                            }
+                            else if(prime%n==0){
+                                i += prime;  //end the loop and check the next number
+                            }
+
+
+                        }
+                        prime++;
+                    }
+                    break;
+                    
+                }
+                case 8:{
+                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob6"<<endl;
+                    cout<<endl<<"Buoyancy"<<endl<<endl;
+
+                    //declare and initialize variables
+                    float weight, radius, volume; //weight in lbs, radius in ft, volume
+                    const float y=62.4f;  //weight in water
+                   //input the weight and radius
+                    cout<<endl<<"Enter the weight in lbs"<<endl;
+                    cin>>weight;
+                    cout<<endl<<"Enter the radius in ft"<<endl;
+                    cin>>radius;
+
+                    //calculate volume 
+                    volume = (4.0f*PI*pow(radius,3))/3.0f;
+                    cout <<"The volume is "<<volume<<" lbs/ft^3"<<endl;
+                    //check if it'll sink
+                    if (volume*y>=weight){
+                        cout<<"It's floating!"<<endl;
+                    }
+                    else{
+                        cout<<"It sank!"<<endl;
+                    }
+                    break;
+                }
+                case 9:{
+                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob7"<<endl;
+                    cout<<endl<<"Fahrenheit and Celsius"<<endl<<endl;
+
+                    //declare and initialize variables
+                    int celsius, farHeit; //celsius, fahrenheit
+
+                    cout<<"Celsius   Fahrenheit"<<endl;
+
+                    //find the temperature where celsius and fahrenheit have the same number
+                    for(int i=100; celsius!=farHeit;i--){
+                        celsius = i;
+                        farHeit = (9.0*celsius)/5 + 32;
+                        cout<<celsius<<setw(10)<<farHeit<<endl;
+                    }
+                    break;
                 }
                 default:{
                     cout<<"Exiting the Program"<<endl;
