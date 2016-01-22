@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     cout<<endl<<"Fahrenheit and Celsius"<<endl<<endl;
             
     //declare and initialize variables
-    int celsius = 0, farHeit = 1; //celsius, fahrenheit
+    int celsius = 100, farHeit = (9*celsius)/5 + 32; //celsius, fahrenheit
     
     cout<<"Celsius   Fahrenheit"<<endl;
   

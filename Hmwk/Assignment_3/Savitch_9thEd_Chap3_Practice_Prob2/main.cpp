@@ -32,29 +32,29 @@ int main(int argc, char** argv) {
         cin>>balance;
 
         if(balance>1000){
-            interst = (balance-1000)*.01 + .015*1000;
+            interst = (balance-1000.0f)*.01 + .015f*1000.0f;
             total = balance+interst;
             if(total <=10){
                 minPay = total;
             }else{
-                if(.1*total>10){
-                    minPay = .1*total;
+                if(.1f*total>10){
+                    minPay = .1f*total;
                 }else{
-                    minPay = 10;
+                    minPay = 10.0f;
                 }
 
             }
 
         }else{
-            interst = balance*.015;
+            interst = balance*.015f;
             total = balance+interst;
             if(total <=10){
                 minPay = total;
             }else{
-                if(.1*total>10){
-                    minPay = .1*total;
+                if(.1f*total>10){
+                    minPay = .1f*total;
                 }else{
-                    minPay = 10;
+                    minPay = 10.0f;
                 }
 
             }
