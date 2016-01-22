@@ -28,6 +28,12 @@ int main(int argc, char** argv) {
     unsigned short thsnds;//3*tens
     unsigned short sum; //checks the sum
     //solving the riddle
+    cout<<"The Riddler's address is:"<<endl;
+    cout<<"A: All 4 digits are different."<<endl;
+    cout<<"B: The digit in the thousands place is three times the digit in the tens place."<<endl;
+    cout<<"C: The number is odd."<<endl;
+    cout<<"D: The sum of the digits is 27."<<endl;
+    
     do{
         do{
            ones = rand() % 10; 
@@ -49,7 +55,7 @@ int main(int argc, char** argv) {
     
     
     
-    cout<<"The Riddler's address is "<<thsnds<<hundrds<<tens<<ones<<endl;    
+    cout<<"The Riddler's address is "<<thsnds<<hundrds<<tens<<ones<<" Pennsylvania Avenue."<<endl;    
     
         
     

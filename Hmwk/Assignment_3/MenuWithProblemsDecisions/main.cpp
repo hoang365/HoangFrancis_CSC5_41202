@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
         cout<<"Type 7 to Display Problem 7"<<endl;//Prime numbers 3-100
         cout<<"Type 8 to Display Problem 8"<<endl; //Check buoyancy of spheres
         cout<<"Type 9 to Display Problem 9"<<endl; //Find the equivalent temperature of Celsius and Fahrenheit
+        cout<<"Type 10 to Display Problem 10"<<endl; //Solves a Riddler problem
         cout<<"Type anything else to exit "<<endl;
         cin>>nSoltn;
     
@@ -601,10 +602,10 @@ int main(int argc, char** argv) {
                     cout <<"The volume is "<<volume<<" lbs/ft^3"<<endl;
                     //check if it'll sink
                     if (volume*y>=weight){
-                        cout<<"It's floating!"<<endl;
+                        cout<<"It's floating!"<<endl<<endl;
                     }
                     else{
-                        cout<<"It sank!"<<endl;
+                        cout<<"It sank!"<<endl<<endl;
                     }
                     break;
                 }
@@ -621,8 +622,51 @@ int main(int argc, char** argv) {
                     for(int i=100; celsius!=farHeit;i--){
                         celsius = i;
                         farHeit = (9.0*celsius)/5 + 32;
-                        cout<<celsius<<setw(10)<<farHeit<<endl;
+                        cout<<celsius<<setw(10)<<farHeit<<endl<<endl;
                     }
+                    break;
+                }
+                case 10:{
+                    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prog Prac13"<<endl;
+                    cout<<endl<<"Solving a Riddler riddle"<<endl<<endl;
+
+                    //declare and initialize variables
+                    unsigned short ones; //has to be odd
+                    unsigned short tens; //all four digits are different
+                    unsigned short hundrds;//sum of digits is 27
+                    unsigned short thsnds;//3*tens
+                    unsigned short sum; //checks the sum
+                    //solving the riddle
+                    cout<<"The Riddler's address is:"<<endl;
+                    cout<<"A: All 4 digits are different."<<endl;
+                    cout<<"B: The digit in the thousands place is three times the digit in the tens place."<<endl;
+                    cout<<"C: The number is odd."<<endl;
+                    cout<<"D: The sum of the digits is 27."<<endl;
+                            
+                            
+                    
+                    do{
+                        do{
+                           ones = rand() % 10; 
+                        }while(ones%2 == 0);
+
+                        do{
+                            tens=rand()%10;
+                            hundrds = tens*3;
+                        }    while(tens == ones || hundrds > 9);
+                        do{
+                            thsnds =rand()%9 +1;
+                        }while (thsnds == ones || thsnds == tens || thsnds ==hundrds);
+
+
+                        sum = ones+tens+hundrds+thsnds; 
+
+
+                    }while(sum != 27);
+
+
+
+                    cout<<"The Riddler's address is "<<thsnds<<hundrds<<tens<<ones<<" Pennsylvania Avenue."<<endl<<endl;
                     break;
                 }
                 default:{
