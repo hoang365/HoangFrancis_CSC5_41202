@@ -188,7 +188,7 @@ int main(int argc, char** argv) {
                     break;
                 }
                 case 5:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob1"<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob1"<<endl;
                     cout<<endl<<"The Rock-Paper-Scissor Game"<<endl<<endl;
 
 
@@ -265,7 +265,7 @@ int main(int argc, char** argv) {
                     break;
                 }
                 case 6:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob3"<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob3"<<endl;
                     cout<<endl<<"Astrology"<<endl<<endl;
 
                     //Loop until user wants to quit
@@ -560,7 +560,7 @@ int main(int argc, char** argv) {
                     }while(toupper(qstion) == 'Y');
                 }
                 case 7:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob5"<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob5"<<endl;
                     cout<<endl<<"Calculating Prime Numbers for 3 to 100"<<endl<<endl;
 
                     //declare and initialize variables
@@ -585,7 +585,7 @@ int main(int argc, char** argv) {
                     
                 }
                 case 8:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob6"<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob6"<<endl;
                     cout<<endl<<"Buoyancy"<<endl<<endl;
 
                     //declare and initialize variables
@@ -610,18 +610,18 @@ int main(int argc, char** argv) {
                     break;
                 }
                 case 9:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob7"<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob7"<<endl;
                     cout<<endl<<"Fahrenheit and Celsius"<<endl<<endl;
 
                     //declare and initialize variables
-                    int celsius, farHeit; //celsius, fahrenheit
+                    int celsius = 0, farHeit = 1; //celsius, fahrenheit
 
                     cout<<"Celsius   Fahrenheit"<<endl;
 
                     //find the temperature where celsius and fahrenheit have the same number
                     for(int i=100; celsius!=farHeit;i--){
                         celsius = i;
-                        farHeit = (9.0*celsius)/5 + 32;
+                        farHeit = (9*celsius)/5 + 32;
                         cout<<celsius<<setw(10)<<farHeit<<endl<<endl;
                     }
                     break;
