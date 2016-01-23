@@ -2,7 +2,7 @@
      File:   main.cpp
      Author: Francis Hoang
      Created on January 20, 2016, 8:58 AM
-     Purpose: Rock Paper Scissors
+     Purpose: Temperature Table
  */
 //System Libraries
 #include <iostream>

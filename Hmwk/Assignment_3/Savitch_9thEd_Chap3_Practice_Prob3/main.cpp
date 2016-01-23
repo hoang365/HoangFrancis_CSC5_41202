@@ -20,7 +20,7 @@ using namespace std;
  
 
 int main(int argc, char** argv) {
-    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob3"<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob3"<<endl;
     cout<<endl<<"Astrology"<<endl<<endl;
             
     
