@@ -15,7 +15,7 @@ using namespace std;
 //Global Constants
 
 //Function prototypes
-float value(int price, int num, int denom);
+float value(int price, int num, int denom); //converts the fractional price to a digital number
 //Execution begins here
 int main(int argc, char** argv) {
     cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 3"<<endl;
@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
         cin>>shares;
         cout<<"What is its whole dollar price value?"<<endl;
         cin>>wPrice;
-        cout<<"What is the numberator price value?"<<endl;
+        cout<<"What is the numerator price value?"<<endl;
         cin>>num;
         cout<<"What is denominator price value?"<<endl;
         cin>>denom;
