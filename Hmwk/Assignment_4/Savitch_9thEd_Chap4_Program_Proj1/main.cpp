@@ -47,7 +47,6 @@ int main(int argc, char** argv) {
         
         
         //output
-        cout<<fixed<<setprecision(2)<<showpoint;
         cout<<"The loan balance is "<<loan<<" dollars."<<endl;
         cout<<"The interest payments is "<<i<<" dollars."<<endl;
         cout<<"The annual mortgage cost is "<<amCost<<" dollars."<<endl;

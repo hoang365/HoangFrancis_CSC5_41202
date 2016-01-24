@@ -13,7 +13,7 @@ using namespace std;
 //User Libraries
 
 //Global Constants
-const float G = 6.673e-8;
+const float G = 6.673e-8; // universal gravitational constant
 //Function prototypes
 float force(float mass1, float mass2, float distnce);  //calculates the gravitational force between two objects
 

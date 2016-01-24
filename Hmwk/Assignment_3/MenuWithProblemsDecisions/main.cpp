@@ -559,6 +559,7 @@ int main(int argc, char** argv) {
                         cout<<endl<<"Do you want to repeat?"<<endl;
                         cin>>qstion;
                     }while(toupper(qstion) == 'Y');
+                    break;
                 }
                 case 7:{
                     cout<<endl<<"Solution to Savitch 9thEd Chap3 Prac Prob5"<<endl;

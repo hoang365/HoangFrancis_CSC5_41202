@@ -16,9 +16,17 @@ using namespace std;
 //User Libraries
 
 //Global Constants
-
+const float LTOGAL = .264179f; //one liter is .264179 gallons
+const float G = 6.673e-8;  // universal gravitational constant
 //Function prototypes
-
+float mileage(float gas,float miles); //calculates the mileage
+float value(int price, int num, int denom); //converts the fractional price to a digital number
+float rate(float old, float n);  //calculates the rate of inflation
+float fRate(float rate, float price);                  //calculates future rate
+float intrst(float balance, float rate, unsigned int months);  //calculates the total interest due
+float force(float mass1, float mass2, float distnce);  //calculates the gravitational force between two objects
+float mortg(float loan, float intr);
+float afTax(float mortg, float tSav);
 //Execution begins here
 
  
@@ -38,6 +46,11 @@ int main(int argc, char** argv) {
         cout<<"Type 3 to Display Problem 3"<<endl;
         cout<<"Type 4 to Display Problem 4"<<endl;
         cout<<"Type 5 to Display Problem 5"<<endl;
+        cout<<"Type 6 to Display Problem 6"<<endl;
+        cout<<"Type 7 to Display Problem 7"<<endl;
+        cout<<"Type 8 to Display Problem 8"<<endl;
+        cout<<"Type 9 to Display Problem 9"<<endl;
+        cout<<"Type 10 to Display Problem 10"<<endl;
         cout<<"Type anything else to exit "<<endl;
         cin>>nSoltn;
     
@@ -45,517 +58,301 @@ int main(int argc, char** argv) {
         
             switch(nSoltn){
                 case 1:{
-                    cout<<"Solution to Savitch 8thEd Chap3 Prob10"<<endl;
-                    cout<<"The Fibonacci Sequence"<<endl<<endl;
-                            //declare variables
-                            unsigned int fi,fim1,fim2; //Designations in the seqeunce
-                            unsigned short nTerms;//number of terms in the sequence
-                            unsigned short counter;//current position in the sequence
-                            const char DREPRO = 5;     //Days to reproduce
-                            float crudWt;          //Weight of crud;
-                            unsigned int nDays;    //Number of days to grow Crud
-                            //Initialize the sequence
-                            fim2=fim1=1;         //start the sequence
-                            counter=2;           //initialize the counter
-                            //input the number of terms                    
-                            cout<<"Input the initial weight of the crud in lbs"<<endl;
-                            cin>>crudWt;
-                            cout<<"How many days will the crud be allowed to grow"<<endl;
-                            cin>>nDays;
+                    cout<<endl<<"Solution to Gaddis 8thEd Chap5 Prob7"<<endl;
+                    cout<<endl<<"Display a Salary Table"<<endl<<endl;
 
-                            nTerms=nDays/DREPRO+1;
-                            //Output or calculate the output required
-                            if(nTerms==1){
-                                cout<<"Term "<<nTerms<<" in the sequence = "
-                                <<fim2<<endl<<endl;
-                                cout<<"After "<<nDays<<" days the crud weighs "<<fim2*crudWt<<"(lbs)"<<endl<<endl;
-                            }else if(nTerms==2){
-                                cout<<"Term "<<nTerms<<" in the sequence = "
-                                <<fim2<<endl<<endl;
-                                cout<<"After "<<nDays<<" days the crud weighs "<<fim1*crudWt<<"(lbs)"<<endl<<endl;
-                            }else{
-                                do{
-                                    fi=fim1+fim2;
-                                    counter++;
-                                    fim2=fim1;
-                                    fim1=fi;
-                                }while(counter<nTerms);
-                            cout<<"Term "<<nTerms<<" in the sequence = "<<
-                            fi<<endl<<endl;
-                            cout<<"After "<<nDays<<" days the crud weighs "<<fi*crudWt<<"(lbs)"<<endl<<endl;
-                            }        
+                    //declare variables
+                    unsigned int salary = 1; //Salary starting at a penny
+                    float totPay = salary;            //Total Pay b summing the salary
+
+                    //Loop to generate the Salary Table and Total Paid
+                    cout<<" Day        $Salary         $Total"<<endl;
+                    cout<<fixed<<setprecision(2)<<showpoint;
+                    cout<<setw(4)<<"1"<<setw(15)<<salary/100.0f<<setw(15)<<totPay/100.0f<<endl;
+                    for(int day=2;day<=31;day++){
+                        //salary*=2;
+                        salary<<=1; //bit shift right by 1 bit
+                        totPay+=salary;
+                        cout<<setw(4)<<day<<setw(15)<<salary/100.0<<setw(15)<<totPay/100.0<<endl;
+                    }
                     break;
                 }
                 case 2:{
-                    //Declare and initialize variable for etox
-                        //Declare and initialize variable for etox
-                        cout<<"Solution to Savitch 8thEd Chap3 Prob11"<<endl;
-                        cout<<"e to the power of x"<<endl<<endl;
-                        float etox=1,x; //e^x
-                        float tol = 1e-6f;
-                        float term = 1;
-                        unsigned int nTerm; //counter to determine how many terms
-                        //input the value x
-                        cout<<"Input x of e^x computation"<<endl;
-                        cin>>x;
+                    cout<<endl<<"Solution to Gaddis 8thEd Chap5 Prob12"<<endl;
+                    cout<<endl<<"Display a Temperature Table"<<endl<<endl;
 
-                        //Calculate e^x
-                        for(nTerm=1;term > tol;term*=x/nTerm++, etox+=term);
+                    //declare variables
+                    float slope=5.0f/9;
+                    char intrcpt=-32;
+                    unsigned char c1=0,c2=100,f1=32,f2=212; //data pts of freezing and boiling
 
-
-                        //Output the results
-                        cout<<"The exact value of e^"<<x<<"="<<exp(x)<<endl;
-                        cout<<"The number of terms it took to aprox e^"<<x<<"="<<nTerm<<endl;
-                        cout<<"The approx value of e^"<<x<<"="<<etox<<endl<<endl;
+                    //Loop to generate the degree Celsius and output the table
+                    cout<<"Fahrenheit   Celsius   Celsius"<<endl;
+                    cout<<fixed<<setprecision(2)<<showpoint;
+                    for(int f=f1;f<=f2;f++){
+                        float ceq=slope*(f+intrcpt);
+                        float cintrp=c1+static_cast<float>(f-f1)/(f2-f1)*(c2-c1);
+                        cout<<setw(10)<<f<<setw(10)<<ceq<<setw(10)<<cintrp<<endl;
+                    }
 
                     break;
                 }
                 case 3:{
-                    cout<<"Solution to Savitch 8thEd Chap3 Prob12"<<endl;
-                    cout<<"Aproximating pi"<<endl<<endl;
-                        float pi = 4, n, piValue; 
-                        //input the value x
-                        cout<<"Input n for how many values of pi"<<endl;
-                        cin>>n;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 1"<<endl;
+                    cout<<endl<<"Calculating Mileage"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float gas;    //liters of gas consumed by car
+                        float miles;  //miles traveled by car
+                        float mpg;    //miles per gallon
 
-                        for(int i = 0; i<=n;i++){
-                             piValue += pow(-1,i)/(2*i+1);
+                        //Ask user how many liters of gas was consumed, and how many miles
+                        cout<<"How much gas in liters was consumed?"<<endl;
+                        cin>>gas;
+                        cout<<"How many miles were traveled?"<<endl;
+                        cin>>miles;
 
-                        }
-                        //Calculate pi
-                        pi *= piValue;
+                        //calculate the mileage
+                        mpg = mileage(gas,miles);
 
+                        //output
+                        cout<<"Your mileage was "<<mpg<<" miles per gallon."<<endl;
 
-                        //Output the results
-
-                        cout<<"The approximate value of pi calculated to "<<n<<" terms is "<<pi<<endl<<endl;
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
+                        cin>>qstion;
+                    }while(toupper(qstion) == 'Y');  
                     break;
                 }
                 case 4:{
-                    cout<<"Solution to Savitch 9thEd Chap3 Prac Prob2"<<endl;
-                    cout<<"Calculating credit payments"<<endl<<endl;
-                    char qstion;
-                    do{
-                        //Declare and initialize variables
-                        float interst, total, minPay; //interest, total amount due, minimum payment due
-                        float balance; //account balance
-                        //Calculate or map inputs to outputs
-                        cout<<fixed<<setprecision(2)<<showpoint;
-                        cout<<"Input the account balance"<<endl;
-                        cin>>balance;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 2"<<endl;
+                    cout<<endl<<"Calculating Mileage and Comparing"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float gas;    //liters of gas consumed by car
+                        float miles;  //miles traveled by car
+                        float mpg;    //miles per gallon of the first car
+                        float mpg2;   //miles per gallon of the second car
+                        //Ask user how many liters of gas was consumed, and how many miles
+                        cout<<"How much gas in liters was consumed by Car A?"<<endl;
+                        cin>>gas;
+                        cout<<"How many miles were traveled by the Car A?"<<endl;
+                        cin>>miles;
+                        mpg = mileage(gas,miles); //calculate mileage of the first car
 
-                        if(balance>1000){
-                            interst = (balance-1000)*.01 + .015*1000;
-                            total = balance+interst;
-                            if(total <=10){
-                                minPay = total;
-                            }else{
-                                if(.1*total>10){
-                                    minPay = .1*total;
-                                }else{
-                                    minPay = 10;
-                                }
 
-                            }
+                        cout<<"How much gas in liters was consumed by the Car B?"<<endl;
+                        cin>>gas;
+                        cout<<"How many miles were traveled by the Car B?"<<endl;
+                        cin>>miles;
+                        mpg2 = mileage(gas,miles);  //calculate mileage of the second car
 
+
+                        //output
+                        cout<<"The mileage of car A was "<<mpg<<" miles per gallon."<<endl;
+                        cout<<"The mileage of car B was "<<mpg2<<" miles per gallon."<<endl;
+
+                        if(mpg>mpg2){
+                            cout<<"Car A has better fuel efficiency."<<endl;
                         }else{
-                            interst = balance*.015;
-                            total = balance+interst;
-                            if(total <=10){
-                                minPay = total;
-                            }else{
-                                if(.1*total>10){
-                                    minPay = .1*total;
-                                }else{
-                                    minPay = 10;
-                                }
-
-                            }
+                            cout<<"Car B has better fuel efficiency."<<endl;
                         }
-                        //Output the results
-                        cout<<"Interest due: $"<<interst<<endl;
-                        cout<<"Total amount due: $"<<total<<endl;
-                        cout<<"Minimum payment due: $"<<minPay;
 
-                        cout<<endl<<"Would you like to repeat the calculation?"<<endl;
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
                         cin>>qstion;
-                    }while(toupper(qstion)== 'Y');
+                    }while(toupper(qstion) == 'Y');  
                     break;
                 }
                 case 5:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob1"<<endl;
-                    cout<<endl<<"The Rock-Paper-Scissor Game"<<endl<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 3"<<endl;
+                    cout<<endl<<"Calculating Stocks"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        unsigned int shares;    //number of shares
+                        unsigned int wPrice;   //whole dollar portion of the price
+                        unsigned int num;    //numerator of the fraction portion of the price
+                        unsigned int denom;   //denominator of the fraction portion of the price
+                        float total; //value of one's entire holdings
+                        //Ask user how many shares of stocks they own, and its price value in fractions
+                        cout<<"How many shares of stock do you own?"<<endl;
+                        cin>>shares;
+                        cout<<"What is its whole dollar price value?"<<endl;
+                        cin>>wPrice;
+                        cout<<"What is the numerator price value?"<<endl;
+                        cin>>num;
+                        cout<<"What is denominator price value?"<<endl;
+                        cin>>denom;
+                        total =shares * value(wPrice,num,denom); //calculate total value
 
-
-                    //Set the random number seed
-                    srand(static_cast<unsigned int>(time(0)));
-
-                    //Loop until player wants to quit
-                    char qstion; //Question, does player want to keep playing  
-                    do{
-                    //Declare and initialize variables
-                        char computr;      //The computers play
-                        char player;       //The players move
-
-                        //Input the players turn
-                        do{
-                            cout<<"What is your move P,R,S?"<<endl;
-                            cin>>player;
-                            player=toupper(player);
-                        }while(!(player=='P'||player =='R'||player=='S'));
-
-                        //Computer generated play
-                        do{
-                            computr=rand()%4+80;
-                        }while(computr == 'Q');
-
-                        //Calculate or map inputs to outputs
-
-                        //Output the results
-                        cout<<"The Computer played "<<computr<<endl;
-                        cout<<"The Player's move was "<<player<<endl;
-
-                        switch(player){
-                            case 'P':{
-                                if (computr == 'R'){
-                                    cout<<"Paper covers rock"<<endl;
-                                    cout<<"The player wins"<<endl;
-                                }else if(computr == 'S'){
-                                    cout<<"Scissors cut paper"<<endl;
-                                    cout<<"The computer wins"<<endl;
-                                }else{
-                                    cout<<"Nobody wins"<<endl;
-                                }
-                                break;
-                            }
-                            case 'S':{
-                                if (computr == 'P'){
-                                    cout<<"Scissors cut paper"<<endl;
-                                    cout<<"The player wins"<<endl;
-                                }else if(computr == 'R'){
-                                    cout<<"Rock breaks scissors"<<endl;
-                                    cout<<"The computer wins"<<endl;
-                                }else{
-                                    cout<<"Nobody wins"<<endl;
-                                }
-                                break;
-                            }
-                            case 'R':{
-                                if (computr == 'S'){
-                                    cout<<"Rock breaks scissors"<<endl;
-                                    cout<<"The player wins"<<endl;
-                                }else if(computr == 'P'){
-                                    cout<<"Paper covers rock"<<endl;
-                                    cout<<"The computer wins"<<endl;
-                                }else{
-                                    cout<<"Nobody wins"<<endl;
-                                }
-                                break;
-                            }
-                            }
-                    //Keep playing?
-                    cout<<endl<<"Do you want to continue playing?"<<endl;
-                    cin>>qstion;
-                    }while(toupper(qstion) == 'Y');
+                        //output
+                        cout<<fixed<<setprecision(2)<<showpoint;
+                        cout<<"The value of your entire holdings is "<<total<<" dollars."<<endl;  
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
+                        cin>>qstion;
+                    }while(toupper(qstion) == 'Y');  
                     break;
                 }
                 case 6:{
-                    cout<<endl<<"Soultion to Savitch 9thEd Chap3 Prac Prob3"<<endl;
-                    cout<<endl<<"Astrology"<<endl<<endl;
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 4"<<endl;
+                    cout<<endl<<"Calculating Rate of Inflation"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float oPrice;    //price from 1 year ago
+                        float cPrice;   //current price
+                        float roi;    //rate of inflation
 
+                        //Ask user the prices
+                        cout<<"Enter the old price:"<<endl;
+                        cin>>oPrice;
+                        cout<<"Enter the current price:"<<endl;
+                        cin>>cPrice;
 
+                        roi = rate(oPrice,cPrice); //calculate rate of inflation
 
+                        //output
+                        cout<<fixed<<setprecision(2)<<showpoint;
+                        cout<<"The rate of inflation is "<<roi*100.0f<<" percent."<<endl;  
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
+                        cin>>qstion;
+                    }while(toupper(qstion) == 'Y');  
+                    break;
+                }
+                case 7:{
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 5"<<endl;
+                    cout<<endl<<"Calculating Rate of Inflation in 2 years"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float oPrice;    //price from 1 year ago
+                        float cPrice;   //current price
+                        float roi;    //rate of inflation
+                        float fPrice; //future price
+                        //Ask user the prices
+                        cout<<"Enter the old price:"<<endl;
+                        cin>>oPrice;
+                        cout<<"Enter the current price:"<<endl;
+                        cin>>cPrice;
 
-                    //Loop until user wants to quit
-                    char qstion; //Question to repeat
-                    do{
-                        //Declare and initialize variables
-                        unsigned int month;
-                        unsigned int day;
+                        roi = rate(oPrice,cPrice); //calculate rate of interest
+                        fPrice = cPrice + fRate (roi,cPrice);
+                        //output
+                        cout<<fixed<<setprecision(2)<<showpoint;
+                        cout<<"The rate of inflation is "<<roi*100.0f<<" percent."<<endl;
+                        cout<<"In one year, the price will increase by "<<fRate(roi,cPrice)<<" dollars and be "<<fPrice<<" dollars."<<endl;
+                        cout<<"In two years, the price will increase by "<<fRate(roi,fPrice)<<" dollars and be "<<fPrice + fRate(roi,fPrice)<<" dollars."<<endl;
 
-                        cout<<"Enter your birth month (1-12)"<<endl;
-                        cin>>month;
-                        while(month>12){
-                            cout<<"Please enter a valid birth month (1-12)"<<endl;
-                            cin>>month;
-                        }
-                        cout<<"Enter your birthday"<<endl;
-                        cin>>day;
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
+                        cin>>qstion;
+                    }while(toupper(qstion) == 'Y');  
+                    break;
+                }
+                case 8:{
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 6"<<endl;
+                    cout<<endl<<"Calculating interest owed on a credit card"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float balance; //the initial balance
+                        float rate;    //monthly interest rate
+                        unsigned int months; //the number of months the interest must be paid
+                        float due;  //interest to be paid
+                        //Ask user the initial balance and the months to be paid for
+                        cout<<"Enter the initial balance:"<<endl;
+                        cin>>balance;
+                        cout<<"Enter the monthly interest rate:"<<endl;
+                        cin>>rate;
+                        cout<<"Enter the number of months for which interest must be paid:"<<endl;
+                        cin>>months;
 
-                        //Calculate or map inputs to outputs
-                        switch(month){
-                            case 1:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=19){
-                                    if(day == 18 || day == 19){
-                                        cout<<"You are a Capricorn."<<endl;
-                                        cout<<"You are on the cusp of being a Aquarius."<<endl;
-                                    }else{
-                                        cout<<"You are a Capricorn."<<endl;
-                                    }
-                                }else{
-                                    if(day==20 || day ==21){
-                                        cout<<"You are a Aquarius."<<endl;
-                                        cout<<"You are on the cusp of being a Capricorn."<<endl;    
-                                    }else{
-                                        cout<<"You are a Aquarius."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 2:{
-                                while(day>29){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=19){
-                                    if(day == 18 || day == 19){
-                                        cout<<"You are a Aquarius."<<endl;
-                                        cout<<"You are on the cusp of being a Pisces."<<endl;
-                                    }else{
-                                        cout<<"You are a Aquarius."<<endl;
-                                    }
-                                }else{
-                                    if(day==20 || day ==21){
-                                        cout<<"You are a Pisces."<<endl;
-                                        cout<<"You are on the cusp of being a Aquarius."<<endl;    
-                                    }else{
-                                        cout<<"You are a Pisces."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 3:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=20){
-                                    if(day == 19 || day == 20){
-                                        cout<<"You are a Pisces."<<endl;
-                                        cout<<"You are on the cusp of being a Aries."<<endl;
-                                    }else{
-                                        cout<<"You are a Pisces."<<endl;
-                                    }
-                                }else{
-                                    if(day==21 || day ==22){
-                                        cout<<"You are a Aries."<<endl;
-                                        cout<<"You are on the cusp of being a Pisces."<<endl;
-                                    }else{
-                                        cout<<"You are a Aries."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 4:{
-                                while(day>30){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=19){
-                                    if(day == 18 || day == 19){
-                                        cout<<"You are a Aries."<<endl;
-                                        cout<<"You are on the cusp of being a Taurus."<<endl;
-                                    }else{
-                                        cout<<"You are a Aries."<<endl;
-                                    }
-                                }else{
-                                    if(day==20 || day ==21){
-                                        cout<<"You are a Taurus."<<endl;
-                                        cout<<"You are on the cusp of being a Aries."<<endl;    
-                                    }else{
-                                        cout<<"You are a Taurus."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 5:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=20){
-                                    if(day == 19 || day == 20){
-                                        cout<<"You are a Taurus."<<endl;
-                                        cout<<"You are on the cusp of being a Gemini."<<endl;
-                                    }else{
-                                        cout<<"You are a Taurus."<<endl;
-                                    }
-                                }else{
-                                    if(day==21 || day ==22){
-                                        cout<<"You are a Gemini."<<endl;
-                                        cout<<"You are on the cusp of being a Taurus."<<endl;    
-                                    }else{
-                                        cout<<"You are a Gemini."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 6:{
-                                while(day>30){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=21){
-                                    if(day == 20 || day == 21){
-                                        cout<<"You are a Gemini."<<endl;
-                                        cout<<"You are on the cusp of being a Cancer."<<endl;
-                                    }else{
-                                        cout<<"You are a Gemini."<<endl;
-                                    }
-                                }else{
-                                    if(day==22 || day ==23){
-                                        cout<<"You are a Cancer."<<endl;
-                                        cout<<"You are on the cusp of being a Gemini."<<endl;    
-                                    }else{
-                                        cout<<"You are a Cancer."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 7:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=22){
-                                    if(day == 21 || day == 22){
-                                        cout<<"You are a Cancer."<<endl;
-                                        cout<<"You are on the cusp of being a Leo."<<endl;
-                                    }else{
-                                        cout<<"You are a Cancer."<<endl;
-                                    }
-                                }else{
-                                    if(day==23 || day ==24){
-                                        cout<<"You are a Leo."<<endl;
-                                        cout<<"You are on the cusp of being a Cancer."<<endl;    
-                                    }else{
-                                        cout<<"You are a Leo."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 8:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=22){
-                                    if(day == 21 || day == 22){
-                                        cout<<"You are a Leo."<<endl;
-                                        cout<<"You are on the cusp of being a Virgo."<<endl;
-                                    }else{
-                                        cout<<"You are a Leo."<<endl;
-                                    }
-                                }else{
-                                    if(day==23 || day ==24){
-                                        cout<<"You are a Virgo."<<endl;
-                                        cout<<"You are on the cusp of being a Leo."<<endl;    
-                                    }else{
-                                        cout<<"You are a Virgo."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 9:{
-                                while(day>30){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=22){
-                                    if(day == 21 || day == 22){
-                                        cout<<"You are a Virgo."<<endl;
-                                        cout<<"You are on the cusp of being a Libra."<<endl;
-                                    }else{
-                                        cout<<"You are a Virgo."<<endl;
-                                    }
-                                }else{
-                                    if(day==23 || day ==24){
-                                        cout<<"You are a Libra."<<endl;
-                                        cout<<"You are on the cusp of being a Virgo."<<endl;    
-                                    }else{
-                                        cout<<"You are a Libra."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 10:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=22){
-                                    if(day == 21 || day == 22){
-                                        cout<<"You are a Libra."<<endl;
-                                        cout<<"You are on the cusp of being a Scorpio."<<endl;
-                                    }else{
-                                        cout<<"You are a Libra."<<endl;
-                                    }
-                                }else{
-                                    if(day==23 || day ==24){
-                                        cout<<"You are a Scorpio."<<endl;
-                                        cout<<"You are on the cusp of being a Libra."<<endl;    
-                                    }else{
-                                        cout<<"You are a Scorpio."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 11:{
-                                while(day>30){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=21){
-                                    if(day == 20 || day == 21){
-                                        cout<<"You are a Scorpio."<<endl;
-                                        cout<<"You are on the cusp of being a Sagittarius."<<endl;
-                                    }else{
-                                        cout<<"You are a Scorpio."<<endl;
-                                    }
-                                }else{
-                                    if(day==22 || day ==23){
-                                        cout<<"You are a Sagittarius."<<endl;
-                                        cout<<"You are on the cusp of being a Scorpio."<<endl;    
-                                    }else{
-                                        cout<<"You are a Sagittarius."<<endl;
-                                    }
-                                }
-                                break;
-                            }
-                            case 12:{
-                                while(day>31){
-                                    cout<<"Please enter a valid birthday"<<endl;
-                                    cin>>day;
-                                }
-                                if(day<=21){
-                                    if(day == 20 || day == 21){
-                                        cout<<"You are a Sagittarius."<<endl;
-                                        cout<<"You are on the cusp of being a Capricorn."<<endl;
-                                    }else{
-                                        cout<<"You are a Sagittarius."<<endl;
-                                    }
-                                }else{
-                                    if(day==22 || day ==23){
-                                        cout<<"You are a Capricorn."<<endl;
-                                        cout<<"You are on the cusp of being a Sagittarius."<<endl;    
-                                    }else{
-                                        cout<<"You are a Capricorn."<<endl;
-                                    }
-                                }
-                                break;
-                            }
+                        due = intrst(balance, rate, months); //calculate total interest to be paid
 
-                        }
-                        //Output the results
+                        //output
+                        cout<<fixed<<setprecision(2)<<showpoint;
+                        cout<<"The total interest to be paid for "<<months<<" months is "<<due<<" dollars.";
 
-                        //Again?
+                        //repeat?
                         cout<<endl<<"Do you want to repeat?"<<endl;
                         cin>>qstion;
                     }while(toupper(qstion) == 'Y');
+                    break;
+                }
+                case 9:{
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Practice Program 7"<<endl;
+                    cout<<endl<<"Calculating gravitational force"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float mass1;    //the first object's mass
+                        float mass2;    //the second object's mass
+                        float d;        //distance between the two objects
+                        float grav;    //gravitational force
+                        //Ask user the two objects' mass and distance
+                        cout<<"Enter the first object's mass:"<<endl;
+                        cin>>mass1;
+                        cout<<"Enter the second object's mass:"<<endl;
+                        cin>>mass2;
+                        cout<<"Enter the distance between the two objects:"<<endl;
+                        cin>>d;
+
+                        grav = force(mass1, mass2, d); //calculate gravitational force
+
+                        //output
+                        cout<<scientific<<setprecision(5)<<showpoint;
+                        cout<<"The gravitational force is "<<grav<<" dynes.";
+
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
+                        cin>>qstion;
+                    }while(toupper(qstion) == 'Y');  
+                    break;
+                }
+                case 10:{
+                    cout<<endl<<"Solution to Savitch 9thEd Chap4 Program Proj1"<<endl;
+                    cout<<endl<<"Calculating after-tax cost of a new house after one year"<<endl<<endl;
+                    char qstion;  //ask the user to repeat?
+                    do{            
+                        //declare and initialize variables
+                        float price;         //price of the house
+                        float down;          //down payment
+                        float atCost;        //after tax cost = annual mortgage cost - tax savings
+                        float amCost;        //annual mortgage cost = .03*initial loan balance + .06*initial loan balance(interest)
+                        float tSave;         //tax savings = .35* interest payment
+                        float i;             //interest
+                        float loan;          //loan balance = price - down payment
+
+                        //Ask user the price of the house and the down payment
+                        cout<<"Enter the price of the house:"<<endl;
+                        cin>>price;
+                        cout<<"Enter the down payment:"<<endl;
+                        cin>>down;
+
+                        loan = price - down;
+                        i = .06f*loan;
+                        amCost = mortg(loan, i);
+                        tSave = .35f*i;
+                        atCost = afTax(amCost, tSave);
+
+
+                        //output
+                        cout<<fixed<<setprecision(2)<<showpoint;
+                        cout<<"The loan balance is "<<loan<<" dollars."<<endl;
+                        cout<<"The interest payments is "<<i<<" dollars."<<endl;
+                        cout<<"The annual mortgage cost is "<<amCost<<" dollars."<<endl;
+                        cout<<"The tax savings is "<<tSave<<" dollars."<<endl;
+                        cout<<"After taxes, the cost of the house is "<<atCost<<" dollars."<<endl;
+                        //repeat?
+                        cout<<endl<<"Do you want to repeat?"<<endl;
+                        cin>>qstion;
+                    }while(toupper(qstion) == 'Y');  
+                    break;
                 }
                 default:{
                     cout<<"Exiting the Program"<<endl;
@@ -573,3 +370,47 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+float mileage(float gas, float miles){
+    
+    return miles/(gas*LTOGAL);
+    
+}
+
+float value(int price, int num, int denom){
+    
+    return (price + (static_cast<float>(num)/denom));
+    
+}
+
+float rate(float o, float n){
+    
+    return (n-o)/o;
+    
+}
+float fRate(float roi, float price){
+    return roi*price;
+}
+float intrst(float balance, float rate, unsigned int months){
+    float intrst = balance*rate;
+      float total = balance + intrst;
+    float tIntrst = intrst; //total interest
+   
+    for(int i = 1; i < months; i++){
+        intrst = total*rate;
+        total += intrst;
+        tIntrst += intrst;
+    }
+    return tIntrst;
+}
+float force(float mass1, float mass2, float d){
+    float force = (G*mass1*mass2)/(d*d);
+    return force;
+}
+float mortg(float loan, float intr){
+    
+    return .03f*loan + intr;
+}
+
+float afTax(float mortg, float tSav){
+    return mortg -tSav;
+}
