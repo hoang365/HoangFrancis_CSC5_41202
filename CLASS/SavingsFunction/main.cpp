@@ -2,7 +2,7 @@
      File:   main.cpp
      Author: Francis Hoang
      Created on January 4, 2016, 10:18 AM
-     Purpose: Variations
+     Purpose: Variations on savings theme
  */
 //System Libraries
 #include <iostream>//I/O
@@ -24,7 +24,7 @@ float save3(float,float,int); //for loops
 float save4(float,float,int); //for loops banking with pennies
 float save5(float,float,int); //recursion
 float save6(float,int,float=0.05f); //defaulted save function
-float save7(float,float,int);
+float save7(float,float,int); //for-loops and static variable
 //Execution begins here
 
  
