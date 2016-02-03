@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
     float wallet,bet;                   //wallet and bet amount
     char yes;                           //player input
     bool end = false, hasAce = false;   //game is ended, has the ace
+    unsigned int handSz=0;                //handSz
     ofstream out;
     //open the file
     out.open("CardGame.dat");
@@ -70,28 +71,102 @@ int main(int argc, char** argv) {
             pPoints +=card;
             cout<<"You got a "<<card<<endl;
         }
-
+        handSz++;
     }
-    //do{
+    do{
         //outputs player hand and current point value
         cout<<"Your hand is ";
-        for (int i = 0; i<2;i++){
-            cout<<pHand[i]<<" ";
+        for (int i = 0; i<handSz;i++){
+            if(pHand[i]==':'){
+                cout<<"10 ";
+            }else{
+                cout<<pHand[i]<<" ";
+            }
         }
         cout<<endl<<"Your hand is worth "<<pPoints<<" points."<<endl;
-        //check if player has already won
-        if(pPoints == 21 || pPoints >21){
+        //ask if player wants to change Ace value
+        if (hasAce){
+            cout<<"Do you want to change the value of your Ace(s)?"<<endl;
+            cin>>yes;
+            if(tolower(yes) =='y'){
+                pPoints = 0;
+                for(int i = 0; i<handSz;i++){
+                    if (pHand[i]=='J'){
+                        pPoints+=10;
+                    }
+                    else if(pHand[i]=='Q'){
+                        pPoints+=10;
+                    }
+                    else if(pHand[i]=='K'){
+                        pPoints+=10;
+                    }
+                    else if(pHand[i]=='A'){
+                        cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
+                        cin>>yes;
+                        pPoints += (tolower(yes) =='y')?11:1;
+                    }
+                    else{
+                        pPoints +=pHand[i]-48;
+                    }
+                }
+                cout<<endl<<"Your hand is now "<<pPoints<<" points."<<endl;
+            }
+        }
+         //check if player has already won or busted
+        if(pPoints >= 21 ){
             if(pPoints== 21){
                cout<<"BLACKJACK! You Won!"<<endl; 
             }
             else{
-                cout<<"You busted"<<endl;
+                cout<<"Your point total is "<<pPoints<<endl;
+                cout<<"You busted!"<<endl;
             }
             end = true;
         }
+        //Hit me?
+        if(end != true){
+            cout<<"Hit me?"<<endl;
+            cin>>yes;
+            if(tolower(yes) =='y'){
+                card = rand()%13+1;
+                if (card == 11){
+                    pPoints+=10;
+                    pHand[handSz]='J';
+                    cout<<"You got a Jack"<<endl;
+                }
+                else if(card==12){
+                    pPoints+=10;
+                    pHand[handSz]='Q';
+                    cout<<"You got a Queen"<<endl;
+                }
+                else if(card==13){
+                    pPoints+=10;
+                    pHand[handSz]='K';
+                    cout<<"You got a King"<<endl;
+                }
+                else if(card==1){
+                    hasAce=true;
+                    pHand[handSz]='A';
+                    cout<<"You got an Ace"<<endl;
+                    cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
+                    cin>>yes;
+                    pPoints += (tolower(yes) =='y')?11:1;
+                }
+                else{
+                    pHand[handSz]=card+48;
+                    pPoints +=card;
+                    cout<<"You got a "<<card<<endl;
+                }
+                handSz++;
+            }else{
+                cout<<"You stand with a point total of "<<pPoints<<endl;
+                end = true;
+            }
+        }
+       
         
         
-    //}while (end!= true);
+    }while (end!= true);
     
     
     
