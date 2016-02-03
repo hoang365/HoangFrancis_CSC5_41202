@@ -43,33 +43,39 @@ int main(int argc, char** argv) {
     //deal out the first batch of cards
     for (int i =0; i<2; i++){
         card = rand()%13+1;
-        if (card == 11){
-            pPoints+=10;
-            pHand[i]='J';
-            cout<<"You got a Jack"<<endl;
-        }
-        else if(card==12){
-            pPoints+=10;
-            pHand[i]='Q';
-            cout<<"You got a Queen"<<endl;
-        }
-        else if(card==13){
-            pPoints+=10;
-            pHand[i]='K';
-            cout<<"You got a King"<<endl;
-        }
-        else if(card==1){
-            hasAce=true;
-            pHand[i]='A';
-            cout<<"You got an Ace"<<endl;
-            cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
-            cin>>yes;
-            pPoints += (tolower(yes) =='y')?11:1;
-        }
-        else{
-            pHand[i]=card+48;
-            pPoints +=card;
-            cout<<"You got a "<<card<<endl;
+        switch(card){
+            case 11:{
+                pPoints+=10;
+                pHand[i]='J';
+                cout<<"You got a Jack"<<endl;
+                break;
+            }
+            case 12:{
+                pPoints+=10;
+                pHand[i]='Q';
+                cout<<"You got a Queen"<<endl;
+                break;
+            }
+            case 13:{
+                pPoints+=10;
+                pHand[i]='K';
+                cout<<"You got a King"<<endl;
+                break;
+            }
+            case 1:{
+                hasAce=true;
+                pHand[i]='A';
+                cout<<"You got an Ace"<<endl;
+                cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
+                cin>>yes;
+                pPoints += (tolower(yes) =='y')?11:1;
+                break;
+            }
+            default:{
+                pHand[i]=card+48;
+                pPoints +=card;
+                cout<<"You got a "<<card<<endl;
+            }
         }
         handSz++;
     }
@@ -102,22 +108,28 @@ int main(int argc, char** argv) {
             if(tolower(yes) =='y'){
                 pPoints = 0;
                 for(int i = 0; i<handSz;i++){
-                    if (pHand[i]=='J'){
+                    switch(pHand[i]){
+                        case'J':{
                         pPoints+=10;
+                        break;
                     }
-                    else if(pHand[i]=='Q'){
+                        case'Q':{
                         pPoints+=10;
+                        break;
                     }
-                    else if(pHand[i]=='K'){
+                        case'K':{
                         pPoints+=10;
+                        break;
                     }
-                    else if(pHand[i]=='A'){
+                        case'A':{
                         cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
                         cin>>yes;
                         pPoints += (tolower(yes) =='y')?11:1;
+                        break;
                     }
-                    else{
+                        default:{
                         pPoints +=pHand[i]-48;
+                    }
                     }
                 }
                 cout<<endl<<"Your hand is now "<<pPoints<<" points."<<endl;
@@ -132,33 +144,39 @@ int main(int argc, char** argv) {
             cin>>yes;
             if(tolower(yes) =='y'){
                 card = rand()%13+1;
-                if (card == 11){
-                    pPoints+=10;
-                    pHand[handSz]='J';
-                    cout<<"You got a Jack"<<endl;
-                }
-                else if(card==12){
-                    pPoints+=10;
-                    pHand[handSz]='Q';
-                    cout<<"You got a Queen"<<endl;
-                }
-                else if(card==13){
-                    pPoints+=10;
-                    pHand[handSz]='K';
-                    cout<<"You got a King"<<endl;
-                }
-                else if(card==1){
-                    hasAce=true;
-                    pHand[handSz]='A';
-                    cout<<"You got an Ace"<<endl;
-                    cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
-                    cin>>yes;
-                    pPoints += (tolower(yes) =='y')?11:1;
-                }
-                else{
-                    pHand[handSz]=card+48;
-                    pPoints +=card;
-                    cout<<"You got a "<<card<<endl;
+                switch(card){
+                    case 11:{
+                        pPoints+=10;
+                        pHand[handSz]='J';
+                        cout<<"You got a Jack"<<endl;
+                        break;
+                    }
+                    case 12:{
+                        pPoints+=10;
+                        pHand[handSz]='Q';
+                        cout<<"You got a Queen"<<endl;
+                        break;
+                    }
+                    case 13:{
+                        pPoints+=10;
+                        pHand[handSz]='K';
+                        cout<<"You got a King"<<endl;
+                        break;
+                    }
+                    case 1:{
+                        hasAce=true;
+                        pHand[handSz]='A';
+                        cout<<"You got an Ace"<<endl;
+                        cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
+                        cin>>yes;
+                        pPoints += (tolower(yes) =='y')?11:1;
+                        break;
+                    }
+                    default:{
+                        pHand[handSz]=card+48;
+                        pPoints +=card;
+                        cout<<"You got a "<<card<<endl;
+                    }
                 }
                 handSz++;
             }else{
