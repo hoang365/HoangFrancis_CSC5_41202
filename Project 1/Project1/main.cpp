@@ -84,8 +84,19 @@ int main(int argc, char** argv) {
             }
         }
         cout<<endl<<"Your hand is worth "<<pPoints<<" points."<<endl;
+        
+         if(pPoints >= 21 ){
+            if(pPoints== 21){
+               cout<<"BLACKJACK! You Won!"<<endl; 
+            }
+            else{
+                cout<<"Your point total is "<<pPoints<<endl;
+                cout<<"You busted!"<<endl;
+            }
+            end = true;
+        }
         //ask if player wants to change Ace value
-        if (hasAce){
+        if (hasAce && end !=true){
             cout<<"Do you want to change the value of your Ace(s)?"<<endl;
             cin>>yes;
             if(tolower(yes) =='y'){
@@ -110,19 +121,11 @@ int main(int argc, char** argv) {
                     }
                 }
                 cout<<endl<<"Your hand is now "<<pPoints<<" points."<<endl;
+                end= pPoints >21?true:false;
             }
         }
          //check if player has already won or busted
-        if(pPoints >= 21 ){
-            if(pPoints== 21){
-               cout<<"BLACKJACK! You Won!"<<endl; 
-            }
-            else{
-                cout<<"Your point total is "<<pPoints<<endl;
-                cout<<"You busted!"<<endl;
-            }
-            end = true;
-        }
+       
         //Hit me?
         if(end != true){
             cout<<"Hit me?"<<endl;
