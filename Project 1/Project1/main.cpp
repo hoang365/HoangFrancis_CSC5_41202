@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     unsigned short pPoints,dPoints; //player points, dealer points
     unsigned short card;          //card being dealt, dealer's face card
     char pHand[21], dHand[21];          //player and dealer hand
-    float wallet,bet;                   //wallet and bet amount
+    float wallet,bet,iWallet;                   //wallet and bet amount
     char yes;                           //player input
     bool end, hasAce, dDraw;   //game is ended, has the ace, dealer drew a card
     unsigned int win=0,loss=0, draw=0; 
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     //Input data
     cout<<"How much money do you have in $?"<<endl;
     cin>>wallet;
-        
+    iWallet=wallet;    
     do{
         //deal out the first batch of cards
         pPoints=0;
@@ -415,14 +415,17 @@ int main(int argc, char** argv) {
         cout<<"You're broke."<<endl;
     }
     }while(tolower(yes) =='y' && wallet>0);    
-        
-    //}while (end!= true);
-    
-    
-    
-    
+   
     //Output the results
+    cout<<"You won "<<win<<" times"<<endl;
+    cout<<"You lost "<<loss<<" times"<<endl;
+    cout<<"You tied "<<draw<<" times"<<endl;
+    cout<<"You ultimately earned "<<wallet-iWallet<<endl;
     
+    out<<"You won "<<win<<" times"<<endl;
+    out<<"You lost "<<loss<<" times"<<endl;
+    out<<"You tied "<<draw<<" times"<<endl;
+    out<<"You ultimately earned "<<wallet-iWallet<<endl;
     //Exit stage right
     out.close();
     return 0;
