@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     //open the file
     out.open("CardGame.dat");
     //Input data
-    cout<<"How much money do you have?"<<endl;
+    cout<<"How much money do you have in $?"<<endl;
     cin>>wallet;
         
     do{
@@ -46,6 +46,16 @@ int main(int argc, char** argv) {
         end = false;
         hasAce=false;
         dDraw=false;
+        cout<<fixed<<setprecision(2)<<showpoint;
+        cout<<"You currently have $"<<wallet<<endl;
+        cout<<"How much will you bet?"<<endl;
+        cin>>bet;
+        while(bet>wallet){
+            cout<<"That's more money than you have."<<endl;
+            cout<<"How much will you bet?"<<endl;
+            cin>>bet;
+        }
+        wallet -= bet;
         for (int i =0; i<2; i++){
             card = rand()%13+1;
             switch(card){
@@ -208,15 +218,23 @@ int main(int argc, char** argv) {
                 }
                 else if (pPoints == 21 && j==2 && dPoints ==21 && dDraw ==false){
                     cout<<"Draw!"<<endl;
+                    cout<<"You received back $"<<bet<<endl;
+                    wallet+=bet;
                 }else if (dPoints == 21 && dDraw==false){
                     cout<<"House has a Blackjack."<<endl;
                     cout<<"You lost!"<<endl;    
                 }else if (pPoints == 21 && j==2){
                     cout<<"BLACKJACK! You won!"<<endl;
+                    wallet+=bet+bet*1.5;
+                    cout<<"Your payout is $"<<bet+bet*1.5<<endl;
                 }else if(pPoints == 21 && dPoints == 21){                                    
-                    cout<<"Draw!"<<endl;                
+                    cout<<"Draw!"<<endl;
+                    wallet+=bet;
+                    cout<<"You received back $"<<bet<<endl;
                 }else{
                     cout<<"You Won!"<<endl;
+                    wallet+=bet*2;
+                    cout<<"Your payout is $"<<bet*2<<endl;
                 }
                 
                 end = true;
@@ -359,14 +377,20 @@ int main(int argc, char** argv) {
                         cout<<"You lost!"<<endl;
                     }else if (dPoints > 21){
                         cout<<"Dealer busts! You won!"<<endl;
+                        wallet+=bet*2;
+                        cout<<"Your payout is $"<<bet*2<<endl;
                     }else if(pPoints > dPoints){
                         cout<<"Dealer stands at "<<dPoints<<endl;
                         cout<<"You won with "<<pPoints<<"!"<<endl;
+                        wallet+=bet*2;
+                        cout<<"Your payout is $"<<bet*2<<endl;
                     }else if(dPoints > pPoints){
                         cout<<"Dealer stands at "<<dPoints<<endl;
                         cout<<"You lost with "<<pPoints<<"."<<endl;
                     }else{
                         cout<<"Draw"<<endl;
+                        wallet+=bet;
+                        cout<<"You received back $"<<bet<<endl;
                     }
                     end = true;
                 }
@@ -375,7 +399,10 @@ int main(int argc, char** argv) {
         }        
     cout<<"Do you want to play again?"<<endl;
     cin>>yes;
-    }while(tolower(yes) =='y');    
+    if(wallet<=0){
+        cout<<"You're broke."<<endl;
+    }
+    }while(tolower(yes) =='y' && wallet>0);    
         
     //}while (end!= true);
     
