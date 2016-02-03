@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
     float wallet,bet;                   //wallet and bet amount
     char yes;                           //player input
     bool end, hasAce, dDraw;   //game is ended, has the ace, dealer drew a card
+    unsigned int win=0,loss=0, draw=0; 
     ofstream out;
     //open the file
     out.open("CardGame.dat");
@@ -215,26 +216,32 @@ int main(int argc, char** argv) {
                 if (pPoints > 21) {
                     cout<<"Your point total is "<<pPoints<<endl;
                     cout<<"You busted!"<<endl;
+                    loss++;
                 }
                 else if (pPoints == 21 && j==2 && dPoints ==21 && dDraw ==false){
                     cout<<"Draw!"<<endl;
                     cout<<"You received back $"<<bet<<endl;
                     wallet+=bet;
+                    draw++;
                 }else if (dPoints == 21 && dDraw==false){
                     cout<<"House has a Blackjack."<<endl;
-                    cout<<"You lost!"<<endl;    
+                    cout<<"You lost!"<<endl;
+                    loss++;
                 }else if (pPoints == 21 && j==2){
                     cout<<"BLACKJACK! You won!"<<endl;
                     wallet+=bet+bet*1.5;
                     cout<<"Your payout is $"<<bet+bet*1.5<<endl;
+                    win++;
                 }else if(pPoints == 21 && dPoints == 21){                                    
                     cout<<"Draw!"<<endl;
                     wallet+=bet;
                     cout<<"You received back $"<<bet<<endl;
+                    draw++;
                 }else{
                     cout<<"You Won!"<<endl;
                     wallet+=bet*2;
                     cout<<"Your payout is $"<<bet*2<<endl;
+                    win++;
                 }
                 
                 end = true;
@@ -375,22 +382,27 @@ int main(int argc, char** argv) {
                     if(dPoints==21 and dDraw==false){
                         cout<<"House has Blackjack"<<endl;
                         cout<<"You lost!"<<endl;
+                        loss++;
                     }else if (dPoints > 21){
                         cout<<"Dealer busts! You won!"<<endl;
                         wallet+=bet*2;
                         cout<<"Your payout is $"<<bet*2<<endl;
+                        win++;
                     }else if(pPoints > dPoints){
                         cout<<"Dealer stands at "<<dPoints<<endl;
                         cout<<"You won with "<<pPoints<<"!"<<endl;
                         wallet+=bet*2;
                         cout<<"Your payout is $"<<bet*2<<endl;
+                        win++;
                     }else if(dPoints > pPoints){
                         cout<<"Dealer stands at "<<dPoints<<endl;
                         cout<<"You lost with "<<pPoints<<"."<<endl;
+                        loss++;
                     }else{
                         cout<<"Draw"<<endl;
                         wallet+=bet;
                         cout<<"You received back $"<<bet<<endl;
+                        draw++;
                     }
                     end = true;
                 }
