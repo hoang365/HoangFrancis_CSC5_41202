@@ -18,9 +18,9 @@ using namespace std;
 //Global Constants
 
 //Function prototypes
-void sDevi(float, float, float, float); //standard deviation
-float getAvg(float, float, float, float); //gets the average
-float getVar(float, float, float, float, float);    //gets the variance
+void input(float, float); //input
+void convert(float, float); //converts
+float output(float, float);    //output
 
 
 //Execution Begins Here
@@ -30,13 +30,13 @@ int main(int argc, char** argv) {
     char yes;
     do{
     //Declare variables
-    float s1=rand() % 100 + 1;
-    float s2=rand() % 100 + 1;
-    float s3=rand() % 100 + 1;
-    float s4=rand() % 100 + 1;
-    
+        float ft;
+        float inches;
     //execute function
-    sDevi(s1,s2,s3,s4);
+        input(ft, inches);
+        convert(ft, inches);
+        
+        
     cout<<"Repeat test?"<<endl;
     cin>>yes;
     
@@ -48,44 +48,43 @@ int main(int argc, char** argv) {
 
 //000000011111111112222222222333333333344444444445555555555666666666677777777778
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
-//                      standard deviation
-//Inputs:
-//  s1,s2,s3,s4 -> scores
-//Outputs:
-//  avg-> average
-//  sd -> standard deviation
+//                      Input
+
 //******************************************************************************
-void sDevi(float s1, float s2, float s3, float s4){
-    float avg = getAvg(s1,s2,s3,s4);
-    float var = getVar(s1,s2,s3,s4 ,avg);
-    float sd = sqrt(var);
-    cout<<"From the scores of "<<s1<<", "<<s2<<", "<<s3<<", and "<<s4<<":"
-            <<endl;
-    cout<<"The average is "<<avg<<"."<<endl;
-    cout<<"The standard deviation is "<<sd<<"."<<endl;
+void input(float& ft, float& inches){
+    
+    cout<<"Enter the number of feet:"<<endl;
+    cin>>ft;
+    cout<<"Enter the number of inches:"<<endl;
+    cin>>inches;
 }
 
 //000000011111111112222222222333333333344444444445555555555666666666677777777778
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
-//                     Average
+//                     Convert
 //Inputs:
-//  s1,s2,s3,s4->numbers to be calculated
+//  n1,n2->feet and inches to be converted
 
 //******************************************************************************
-float getAvg(float s1, float s2, float s3, float s4){
-    return (s1+s2+s3+s4)/4;
+void convert(float ft, float inches){
+    ft += inches/12.0f;
+    float meter = ft*.3048f;
+    float cm = meter*100.0f;
+    if(cm>100){
+        meter -= cm%100;
+        cm = cm%100*100;
+    }
+    output(meter,cm);
     
 }
 
 //000000011111111112222222222333333333344444444445555555555666666666677777777778
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
-//                     Fill Array
-//Inputs:
-//  s1,s2,s3,s4 -> scores
+//                     Output
+
 
 
 //******************************************************************************
-float getVar(float s1, float s2, float s3, float s4, float a){
-    return (pow(s1-a,2)+pow(s2-a,2)+pow(s3-a,2)+
-            pow(s4-a,2))/4;
+void output(float meter, float cm){
+    cout<<meter<<"meters and "<<cm<<" cm"<<endl;
 }
