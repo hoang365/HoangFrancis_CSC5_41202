@@ -73,19 +73,19 @@ void sDevi(float s1, float s2, float s3, float s4){
 
 //******************************************************************************
 float getAvg(float s1, float s2, float s3, float s4){
-    return (s1+s2+s3+s4)/4.0f;
+    return (s1+s2+s3+s4)/4;
     
 }
 
 //000000011111111112222222222333333333344444444445555555555666666666677777777778
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
-//                     Variance
+//                     Fill Array
 //Inputs:
 //  s1,s2,s3,s4 -> scores
 
 
 //******************************************************************************
 float getVar(float s1, float s2, float s3, float s4, float a){
-    return (pow(s1-a,2.0f)+pow(s2-a,2.0f)+pow(s3-a,2.0f)+
-            pow(s4-a,2.0f))/4.0f;
+    return (pow(s1-a,2)+pow(s2-a,2)+pow(s3-a,2)+
+            pow(s4-a,2))/4;
 }
