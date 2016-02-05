@@ -51,8 +51,8 @@ int main(int argc, char** argv) {
         if(isnan(area)){
             cout<<"Triangle cannot exist."<<endl;
         }else{
-            cout<<"The area of the triangle is "<<area<<" and the perimeter is "<<
-                pmeter<<endl;
+            cout<<"The area of the triangle is "<<area<<
+                    " and the perimeter is "<<pmeter<<endl;
         }
         
         
