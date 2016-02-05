@@ -8,9 +8,7 @@
 
 //System Libraries
 #include <iostream> //I/O
-#include <cstdlib>  //Random Functions
-#include <ctime>    //Setting the seed with time
-#include <cmath>
+#include <iomanip>
 using namespace std;
 
 //User Libraries
@@ -18,23 +16,23 @@ using namespace std;
 //Global Constants
 
 //Function prototypes
-void input(float, float); //input
-void convert(float, float); //converts
-float output(float, float);    //output
+void input(float&, float&); //input
+void convert(float, float, float&, float&); //converts
+void output(float, float, float, float);    //output
 
 
 //Execution Begins Here
 int main(int argc, char** argv) {
     //Initialize the seed
-    srand(static_cast<unsigned int>(time(0)));
+
     char yes;
     do{
     //Declare variables
-        float ft;
-        float inches;
+        float ft, inches, meter, cm;
     //execute function
         input(ft, inches);
-        convert(ft, inches);
+        convert(ft, inches, meter, cm);
+        output(meter, cm ,ft, inches);
         
         
     cout<<"Repeat test?"<<endl;
@@ -66,15 +64,14 @@ void input(float& ft, float& inches){
 //  n1,n2->feet and inches to be converted
 
 //******************************************************************************
-void convert(float ft, float inches){
+void convert(float ft, float inches, float& meter, float& cm){
     ft += inches/12.0f;
-    float meter = ft*.3048f;
-    float cm = meter*100.0f;
-    if(cm>100){
-        meter -= cm%100;
-        cm = cm%100*100;
-    }
-    output(meter,cm);
+    meter = ft*.3048f;
+    cout<<meter<<endl;
+    cm = (meter-static_cast<unsigned int>(meter))*100.0f;
+    meter =static_cast<unsigned int>(meter);
+
+   
     
 }
 
@@ -85,6 +82,8 @@ void convert(float ft, float inches){
 
 
 //******************************************************************************
-void output(float meter, float cm){
-    cout<<meter<<"meters and "<<cm<<" cm"<<endl;
+void output(float meter, float cm ,float ft, float inches){
+    cout<<fixed<<setprecision(2)<<showpoint;
+    cout<<ft<<" ft and "<<inches<<" inches is equal to "<<meter<<" meters and"
+            " "<<cm<<" cm"<<endl;
 }
