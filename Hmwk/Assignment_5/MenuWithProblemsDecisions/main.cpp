@@ -154,7 +154,7 @@ void problem3(){
         }while(tolower(yes)=='y');
 }
 void problem4(){
-    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prac Prog 5"<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prac Prog 9"<<endl;
     cout<<endl<<"Calculate area and perimeter of triangle"<<endl<<endl;
 
     char yes;
