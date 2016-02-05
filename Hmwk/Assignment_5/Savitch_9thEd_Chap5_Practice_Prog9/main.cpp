@@ -73,8 +73,5 @@ void triCalc(float a, float b, float c, float& area, float& pmeter){
     pmeter = a+b+c;
     float s =(a+b+c)/2.0f;
     area = sqrt(s*(s-a)*(s-b)*(s-c));
-    
-    
-    
 }
 
