@@ -26,6 +26,17 @@ void problem5();
 void tInput(unsigned int&, unsigned int&, unsigned int&);     //input
 void timeCon(unsigned int&, char&);                           //convert time 
 void tOutput(unsigned int, unsigned int, unsigned int, char); //output
+void sDevi(float, float, float, float); //standard deviation
+float getAvg(float, float, float, float); //gets the average
+float getVar(float, float, float, float, float);    //gets the variance
+void input2(float&, float&); //input problem 2
+void convert2(float, float, float&, float&); //converts problem 2
+void output2(float, float, float, float);    //output problem 2
+void input3(float&, float&); //input problem 3
+void convert3(float, float, float&, float&); //converts problem 3
+void output3(float, float, float, float);    //output problem 3
+void triCalc(float, float, float, float&, float&); //area and perimeter
+         
 //Execution begins here
 
  
@@ -84,100 +95,123 @@ int main(int argc, char** argv) {
 }
 
 void problem1(){
-                    cout<<endl<<"Solution to Gaddis 8thEd Chap5 Prob7"<<endl;
-                    cout<<endl<<"Display a Salary Table"<<endl<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prac Prog 1"<<endl;
+    cout<<endl<<"Calculate Standard Deviation"<<endl<<endl;
+    //set random number seed
+    srand(static_cast<unsigned int>(time(0)));
+    char yes;
+    do{
+    //Declare variables
+        float s1=rand() % 100 + 1;
+        float s2=rand() % 100 + 1;
+        float s3=rand() % 100 + 1;
+        float s4=rand() % 100 + 1;
 
-                    //declare variables
-                    unsigned int salary = 1; //Salary starting at a penny
-                    float totPay = salary;            //Total Pay b summing the salary
-
-                    //Loop to generate the Salary Table and Total Paid
-                    cout<<" Day        $Salary         $Total"<<endl;
-                    cout<<fixed<<setprecision(2)<<showpoint;
-                    cout<<setw(4)<<"1"<<setw(15)<<salary/100.0f<<setw(15)<<totPay/100.0f<<endl;
-                    for(int day=2;day<=31;day++){
-                        //salary*=2;
-                        salary<<=1; //bit shift right by 1 bit
-                        totPay+=salary;
-                        cout<<setw(4)<<day<<setw(15)<<salary/100.0<<setw(15)<<totPay/100.0<<endl;
-                    }
+        //execute function
+        sDevi(s1,s2,s3,s4);
+        cout<<"Repeat test?"<<endl;
+        cin>>yes;
+    
+    }while(tolower(yes)=='y');
 }
 
 void problem2(){
-                    cout<<endl<<"Solution to Gaddis 8thEd Chap5 Prob12"<<endl;
-                    cout<<endl<<"Display a Temperature Table"<<endl<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prac Prog 2"<<endl;
+    cout<<endl<<"Convert ft to meters"<<endl<<endl;
 
-                    //declare variables
-                    float slope=5.0f/9;
-                    char intrcpt=-32;
-                    unsigned char c1=0,c2=100,f1=32,f2=212; //data pts of freezing and boiling
+    char yes;
+        do{
+        //Declare variables
+            float ft, inches, meter, cm;
+        //execute function
+            input2(ft, inches);
+            convert2(ft, inches, meter, cm);
+            output2(meter, cm ,ft, inches);
 
-                    //Loop to generate the degree Celsius and output the table
-                    cout<<"Fahrenheit   Celsius   Celsius"<<endl;
-                    cout<<fixed<<setprecision(2)<<showpoint;
-                    for(int f=f1;f<=f2;f++){
-                        float ceq=slope*(f+intrcpt);
-                        float cintrp=c1+static_cast<float>(f-f1)/(f2-f1)*(c2-c1);
-                        cout<<setw(10)<<f<<setw(10)<<ceq<<setw(10)<<cintrp<<endl;
-                    }
+
+        cout<<"Repeat test?"<<endl;
+        cin>>yes;
+
+        }while(tolower(yes)=='y');
 }
 void problem3(){
-                    cout<<endl<<"Solution to Gaddis 8thEd Chap5 Prob12"<<endl;
-                    cout<<endl<<"Display a Temperature Table"<<endl<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prac Prog 5"<<endl;
+    cout<<endl<<"Convert lbs to kg"<<endl<<endl;
 
-                    //declare variables
-                    float slope=5.0f/9;
-                    char intrcpt=-32;
-                    unsigned char c1=0,c2=100,f1=32,f2=212; //data pts of freezing and boiling
+    char yes;
+        do{
+        //Declare variables
+            float lb, oz, kg, g;
+        //execute function
+            input3(lb, oz);
+            convert3(lb, oz, kg, g);
+            output3(lb,oz,kg, g);
 
-                    //Loop to generate the degree Celsius and output the table
-                    cout<<"Fahrenheit   Celsius   Celsius"<<endl;
-                    cout<<fixed<<setprecision(2)<<showpoint;
-                    for(int f=f1;f<=f2;f++){
-                        float ceq=slope*(f+intrcpt);
-                        float cintrp=c1+static_cast<float>(f-f1)/(f2-f1)*(c2-c1);
-                        cout<<setw(10)<<f<<setw(10)<<ceq<<setw(10)<<cintrp<<endl;
-                    }
+
+        cout<<"Repeat test?"<<endl;
+        cin>>yes;
+
+        }while(tolower(yes)=='y');
 }
 void problem4(){
-                    cout<<endl<<"Solution to Gaddis 8thEd Chap5 Prob12"<<endl;
-                    cout<<endl<<"Display a Temperature Table"<<endl<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prac Prog 5"<<endl;
+    cout<<endl<<"Calculate area and perimeter of triangle"<<endl<<endl;
 
-                    //declare variables
-                    float slope=5.0f/9;
-                    char intrcpt=-32;
-                    unsigned char c1=0,c2=100,f1=32,f2=212; //data pts of freezing and boiling
+    char yes;
+        do{
+        //Declare variables
+            float a, b, c, area, pmeter; //3 sides, area, perimeter
+        //execute function
+            cout<<"What is the length of the first side?"<<endl;
+            cin>>a;
+            while(a<=0){
+                cout<<"Invalid input. Enter again:"<<endl;
+                cin>>a;
+            }
+            cout<<"What is the length of the second side?"<<endl;
+            cin>>b;
+            while(b<=0){
+                cout<<"Invalid input. Enter again:"<<endl;
+                cin>>b;
+            }
+            cout<<"What is the length of the third side?"<<endl;
+            cin>>c;
+            while(c<=0){
+                cout<<"Invalid input. Enter again:"<<endl;
+                cin>>c;
+            }
+            triCalc(a,b,c,area,pmeter);
 
-                    //Loop to generate the degree Celsius and output the table
-                    cout<<"Fahrenheit   Celsius   Celsius"<<endl;
-                    cout<<fixed<<setprecision(2)<<showpoint;
-                    for(int f=f1;f<=f2;f++){
-                        float ceq=slope*(f+intrcpt);
-                        float cintrp=c1+static_cast<float>(f-f1)/(f2-f1)*(c2-c1);
-                        cout<<setw(10)<<f<<setw(10)<<ceq<<setw(10)<<cintrp<<endl;
-                    }
+            if(isnan(area)){
+                cout<<"Triangle cannot exist."<<endl;
+            }else{
+                cout<<"The area of the triangle is "<<area<<
+                        " and the perimeter is "<<pmeter<<endl;
+            }
+
+
+            cout<<"Repeat test?"<<endl;
+            cin>>yes;
+        }while(tolower(yes)=='y');
 }
 void problem5(){
-                    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prog Project 1"
-                            <<endl;
-                    cout<<endl<<"Convert time from 24-hour notation to 12-hour "
-                            "notation"<<endl<<endl;
+    cout<<endl<<"Solution to Savitch 9thEd Chap5 Prog Project 1"<<endl;
+    cout<<endl<<"Convert time from 24-hour notation to 12-hour notation"<<endl
+            <<endl;
 
-                    char yes;
-                    do{
-                    //Declare variables
-                        unsigned int oHour,hour; //initial hour, hours
-                        unsigned int min;        //mins
-                        char meri;          //AM PM
-                    //execute function
-                        tInput(hour, min, 
-                                oHour); //input time in 24-hour notation
-                        timeCon(hour, meri);      //converts time
-                        tOutput(hour, min, oHour, 
-                                meri); //output time in 12-hour notation
-                        cout<<"Repeat test?"<<endl;
-                        cin>>yes;
-                    }while(tolower(yes)=='y');
+    char yes;
+    do{
+    //Declare variables
+        unsigned int oHour,hour; //initial hour, hours
+        unsigned int min;        //mins
+        char meri;          //AM PM
+    //execute function
+        tInput(hour, min,oHour); //input time in 24-hour notation
+        timeCon(hour, meri);      //converts time
+        tOutput(hour, min, oHour,meri); //output time in 12-hour notation
+        cout<<"Repeat test?"<<endl;
+        cin>>yes;
+    }while(tolower(yes)=='y');
     
     
 }
@@ -240,4 +274,141 @@ void tOutput(unsigned int hour, unsigned int min, unsigned int oHour,
     else{
         cout<<" PM"<<endl;
     }
+}
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                      standard deviation
+//Inputs:
+//  s1,s2,s3,s4 -> scores
+//Outputs:
+//  avg-> average
+//  sd -> standard deviation
+//******************************************************************************
+void sDevi(float s1, float s2, float s3, float s4){
+    float avg = getAvg(s1,s2,s3,s4);
+    float var = getVar(s1,s2,s3,s4 ,avg);
+    float sd = sqrt(var);
+    cout<<"From the scores of "<<s1<<", "<<s2<<", "<<s3<<", and "<<s4<<":"
+            <<endl;
+    cout<<"The average is "<<avg<<"."<<endl;
+    cout<<"The standard deviation is "<<sd<<"."<<endl;
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                     Average
+//Inputs:
+//  s1,s2,s3,s4->numbers to be calculated
+
+//******************************************************************************
+float getAvg(float s1, float s2, float s3, float s4){
+    return (s1+s2+s3+s4)/4.0f;
+    
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                     Variance
+//Inputs:
+//  s1,s2,s3,s4 -> scores
+
+
+//******************************************************************************
+float getVar(float s1, float s2, float s3, float s4, float a){
+    return (pow(s1-a,2.0f)+pow(s2-a,2.0f)+pow(s3-a,2.0f)+
+            pow(s4-a,2.0f))/4.0f;
+}
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                      Input
+
+//******************************************************************************
+void input2(float& ft, float& inches){
+    
+    cout<<"Enter the number of feet:"<<endl;
+    cin>>ft;
+    cout<<"Enter the number of inches:"<<endl;
+    cin>>inches;
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                     Convert
+
+
+//******************************************************************************
+void convert2(float ft, float inches, float& meter, float& cm){
+    ft += inches/12.0f;
+    meter = ft*.3048f;
+    cm = (meter-static_cast<unsigned int>(meter))*100.0f;
+    meter =static_cast<unsigned int>(meter);
+
+   
+    
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                     Output
+
+
+
+//******************************************************************************
+void output2(float meter, float cm ,float ft, float inches){
+    cout<<fixed<<setprecision(2)<<showpoint;
+    cout<<ft<<" ft and "<<inches<<" inches is equal to "<<meter<<" meters and"
+            " "<<cm<<" cm"<<endl;
+}
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                      Input
+
+//******************************************************************************
+void input3(float& lb, float& oz){
+    
+    cout<<"Enter the number of pounds:"<<endl;
+    cin>>lb;
+    cout<<"Enter the number of ounces:"<<endl;
+    cin>>oz;
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                     Convert
+//
+// 
+
+//******************************************************************************
+void convert3(float lb, float oz, float& kg, float& g){
+    lb += oz/16.0f;
+    kg = lb/2.2046f;
+    g = (kg-static_cast<unsigned int>(kg))*1000.0f;
+    kg =static_cast<unsigned int>(kg);
+
+   
+    
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                     Output
+
+
+
+//******************************************************************************
+void output3(float lb, float oz ,float kg, float g){
+    cout<<fixed<<setprecision(2)<<showpoint;
+    cout<<lb<<" pounds and "<<oz<<" ounces is equal to "<<kg<<" kilograms and"
+            " "<<g<<" grams"<<endl;
+}
+
+//000000011111111112222222222333333333344444444445555555555666666666677777777778
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                      Calculate area and perimeter
+
+//******************************************************************************
+void triCalc(float a, float b, float c, float& area, float& pmeter){
+    pmeter = a+b+c;
+    float s =(a+b+c)/2.0f;
+    area = sqrt(s*(s-a)*(s-b)*(s-c));
 }
