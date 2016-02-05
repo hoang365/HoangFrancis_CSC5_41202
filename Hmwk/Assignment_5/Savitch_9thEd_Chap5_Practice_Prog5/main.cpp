@@ -22,7 +22,6 @@ void output(float, float, float, float);    //output
 
 //Execution Begins Here
 int main(int argc, char** argv) {
-    //Initialize the seed
 
     char yes;
     do{
