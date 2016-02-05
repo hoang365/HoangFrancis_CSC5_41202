@@ -2,7 +2,7 @@
     File:   main.cpp
     Author: Francis Hoang
     Created on February 4th, 2016, 9:39 AM
-    Purpose:  Function to convert feet and inches to meters and centimeters
+    Purpose:  Function to convert pounds and ounces to kilograms and grams
  */
 
 //System Libraries
@@ -27,11 +27,11 @@ int main(int argc, char** argv) {
     char yes;
     do{
     //Declare variables
-        float ft, inches, meter, cm;
+        float lb, oz, kg, g;
     //execute function
-        input(ft, inches);
-        convert(ft, inches, meter, cm);
-        output(meter, cm ,ft, inches);
+        input(lb, oz);
+        convert(lb, oz, kg, g);
+        output(lb, oz ,kg, g);
         
         
     cout<<"Repeat test?"<<endl;
@@ -48,25 +48,26 @@ int main(int argc, char** argv) {
 //                      Input
 
 //******************************************************************************
-void input(float& ft, float& inches){
+void input(float& lb, float& oz){
     
-    cout<<"Enter the number of feet:"<<endl;
-    cin>>ft;
-    cout<<"Enter the number of inches:"<<endl;
-    cin>>inches;
+    cout<<"Enter the number of pounds:"<<endl;
+    cin>>lb;
+    cout<<"Enter the number of ounces:"<<endl;
+    cin>>oz;
 }
 
 //000000011111111112222222222333333333344444444445555555555666666666677777777778
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //                     Convert
-
+//Inputs:
+//  n1,n2->feet and inches to be converted
 
 //******************************************************************************
-void convert(float ft, float inches, float& meter, float& cm){
-    ft += inches/12.0f;
-    meter = ft*.3048f;
-    cm = (meter-static_cast<unsigned int>(meter))*100.0f;
-    meter =static_cast<unsigned int>(meter);
+void convert(float lb, float oz, float& kg, float& g){
+    lb += oz/16.0f;
+    kg = lb/2.2046f;
+    g = (kg-static_cast<unsigned int>(kg))*1000.0f;
+    kg =static_cast<unsigned int>(kg);
 
    
     
@@ -79,8 +80,8 @@ void convert(float ft, float inches, float& meter, float& cm){
 
 
 //******************************************************************************
-void output(float meter, float cm ,float ft, float inches){
+void output(float lb, float oz ,float kg, float g){
     cout<<fixed<<setprecision(2)<<showpoint;
-    cout<<ft<<" ft and "<<inches<<" inches is equal to "<<meter<<" meters and"
-            " "<<cm<<" cm"<<endl;
+    cout<<lb<<" pounds and "<<oz<<" ounces is equal to "<<kg<<" kilograms and"
+            " "<<g<<" grams"<<endl;
 }
