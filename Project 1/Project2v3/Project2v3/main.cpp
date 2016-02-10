@@ -39,8 +39,8 @@ int main(int argc, char** argv) {
     float wallet,bet,iWallet;                   //wallet and bet amount
     char yes;                           //player input
     bool end, dDraw;   //game is ended, dealer drew a card
-    unsigned int win=0,loss=0, draw=0; 
-    char player = 'p', dealer = 'd';
+    unsigned int win=0,loss=0, draw=0; //win loss counter
+    char player = 'p', dealer = 'd';   //player dealer tokens
     ofstream out;
     //open the file
     out.open("CardGame.dat");
