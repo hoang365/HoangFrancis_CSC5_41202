@@ -169,45 +169,49 @@ int main(int argc, char** argv) {
                     end = true;
                 }
             }else{
-                cout<<"You stand."<<endl;
-                value(pPoints, player);
-                face(dHand,0);
-                face(dHand,1);
-                value(dPoints,dealer);
-                for(int k =2;dPoints<17;k++){
-                    dDraw=true;
-                    deal(dPoints, dHand, k, dealer);
-                    cout<<"Dealer's hand is ";
-                    output(k+1,dHand);
+                if (pPoints > 21) {
+                    value(pPoints, player);
+                    cout<<"You busted!"<<endl;
+                    loss++;
+                }else{
+                    cout<<"You stand."<<endl;
+                    value(pPoints, player);
+                    face(dHand,0);
+                    face(dHand,1);
                     value(dPoints,dealer);
-
-                }
-                if (pPoints == 21 && j==2 && dPoints ==21 && dDraw ==false){
-                        cout<<"Draw!"<<endl;
-                        cout<<"You received back $"<<bet<<endl;
-                        wallet+=bet;
-                        draw++;
-                    }else if (dPoints == 21 && dDraw==false){
-                        cout<<"House has a Blackjack."<<endl;
-                        cout<<"You lost!"<<endl;
-                        loss++;
-                    }else if (pPoints == 21 && j==2){
-                        cout<<"BLACKJACK! You won!"<<endl;
-                        wallet+=bet+bet*1.5;
-                        cout<<"Your payout is $"<<bet+bet*1.5<<endl;
-                        win++;
-                    }else if(pPoints == 21 && dPoints == 21){                                    
-                        cout<<"Draw!"<<endl;
-                        wallet+=bet;
-                        cout<<"You received back $"<<bet<<endl;
-                        draw++;
-                    }else{
-                        cout<<"You Won!"<<endl;
-                        wallet+=bet*2;
-                        cout<<"Your payout is $"<<bet*2<<endl;
-                        win++;
+                    for(int k =2;dPoints<17;k++){
+                        dDraw=true;
+                        deal(dPoints, dHand, k, dealer);
+                        cout<<"Dealer's hand is ";
+                        output(k+1,dHand);
+                        value(dPoints,dealer);
                     }
-                
+                    if (pPoints == 21 && j==2 && dPoints ==21 && dDraw ==false){
+                            cout<<"Draw!"<<endl;
+                            cout<<"You received back $"<<bet<<endl;
+                            wallet+=bet;
+                            draw++;
+                        }else if (dPoints == 21 && dDraw==false){
+                            cout<<"House has a Blackjack."<<endl;
+                            cout<<"You lost!"<<endl;
+                            loss++;
+                        }else if (pPoints == 21 && j==2){
+                            cout<<"BLACKJACK! You won!"<<endl;
+                            wallet+=bet+bet*1.5;
+                            cout<<"Your payout is $"<<bet+bet*1.5<<endl;
+                            win++;
+                        }else if(pPoints == 21 && dPoints == 21){                                    
+                            cout<<"Draw!"<<endl;
+                            wallet+=bet;
+                            cout<<"You received back $"<<bet<<endl;
+                            draw++;
+                        }else{
+                            cout<<"You Won!"<<endl;
+                            wallet+=bet*2;
+                            cout<<"Your payout is $"<<bet*2<<endl;
+                            win++;
+                        }
+                }end = true;
             }
         
         }        
