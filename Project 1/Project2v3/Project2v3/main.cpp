@@ -17,14 +17,17 @@ using namespace std;
 //Global Constants
 
 //Function prototypes
-void ideal(unsigned short&, unsigned short&,char[], char[]);
-void bett(float&, float&);
-void output(int, char[]);
-void deal(unsigned short&, char[], int, char);
+void deal(unsigned short&, unsigned short&,char[], char[]); //initial deal
+void bett(float&, float&); //bet money
+void output(int, char[]); //outputs hand
+void deal(unsigned short&, char[], int, char); //deals a card
 bool ace(char[], int); //checks for an ace
-void sort(char[], int);
-int cValue(char); //converts face card to int
-
+void sort(char[], int); //sorts the hand
+int  cValue(char); //converts face card to int
+void reset(unsigned short&, unsigned short&, bool&, bool&); //resets game
+void face(char[], int); //outputs dealer's face card and hold card
+void value(unsigned short, char); //hand value
+void cAce (char[], unsigned short&, int j);      //change ace value
 //Execution begins here
 
  
@@ -50,54 +53,37 @@ int main(int argc, char** argv) {
     iWallet=wallet;    //stores the initial wallet value
     do{
         //resets everything to starting game
-        pPoints=0;
-        dPoints=0;
-        end = false;
-        dDraw=false;
+        reset(pPoints,dPoints,end,dDraw);
         bett(bet,wallet); //make your bet       
-        ideal(pPoints,dPoints,pHand,dHand); //deals first two cards
+        deal(pPoints,dPoints,pHand,dHand); //deals first two cards
         for(int j =2; end == false; j++){
             //outputs player hand and current point value
             
             cout<<"Your hand is ";
             output(j,pHand);
-            cout<<endl<<"Dealer's face card is ";
-            if (dHand[0]==':'){
-                cout<<"10"<<endl;
-            }else{
-                cout<<dHand[0]<<endl;
-            }
-            cout<<"Your hand is worth "<<pPoints<<" points."<<endl;
+            //output dealer's face card
+            face(dHand, 0);
+            //output hand value
+            value(pPoints, player);
             //check win/lose condition
             if(pPoints >= 21){
                 if (pPoints > 21) {
-                    cout<<"Your point total is "<<pPoints<<endl;
+                    value(pPoints, player);
                     cout<<"You busted!"<<endl;
                     loss++;
                 }else{
-                    cout<<"Dealer's face card is ";
-                    if (dHand[0]==':'){
-                        cout<<"10"<<endl;
-                    }else{
-                        cout<<dHand[0]<<endl;
+                    face(dHand, 0);
+                    face(dHand, 1);
+                    value(dPoints, dealer);
+                    for(int k =2;dPoints<17;k++){
+                        dDraw=true;
+                        deal(dPoints,dHand,k,dealer);
+
+                        cout<<"Dealer's hand is ";
+                        output(k+1, dHand);
+                        value(dPoints,dealer);
+
                     }
-                    cout<<"Dealer's hole card is ";
-                        if (dHand[1]==':'){
-                            cout<<"10"<<endl;
-                        }else{
-                            cout<<dHand[1]<<endl;
-                        }
-                        cout<<"Dealer's hand is worth "<<dPoints<<" points."<<endl;
-                        for(int k =2;dPoints<17;k++){
-                            dDraw=true;
-                            deal(dPoints,dHand,k,dealer);
-
-                            cout<<"Dealer's hand is ";
-                            output(k+1, dHand);
-                            cout<<endl<<"Dealer's hand is worth "<<dPoints
-                                    <<" points."<<endl;
-
-                        }
 
                     if (pPoints == 21 && j==2 && dPoints ==21 && dDraw ==false){
                         cout<<"Draw!"<<endl;
@@ -124,12 +110,7 @@ int main(int argc, char** argv) {
                         cout<<"Your payout is $"<<bet*2<<endl;
                         win++;
                     }
-                
-                }
-                    
-                
-                
-                
+                }               
                 end = true;
             }
             
@@ -139,34 +120,10 @@ int main(int argc, char** argv) {
                 cout<<"Do you want to change the value of your Ace(s)?"<<endl;
                 cin>>yes;
                 if(tolower(yes) =='y'){
-                    pPoints = 0;
-                    for(int i = 0; i<j;i++){
-                        switch(pHand[i]){
-                            case'J':{
-                            pPoints+=10;
-                            break;
-                        }
-                            case'Q':{
-                            pPoints+=10;
-                            break;
-                        }
-                            case'K':{
-                            pPoints+=10;
-                            break;
-                        }
-                            case'A':{
-                            cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
-                            cin>>yes;
-                            pPoints += (tolower(yes) =='y')?11:1;
-                            break;
-                        }
-                            default:{
-                            pPoints +=pHand[i]-48;
-                        }
-                        }
-                    }
-                    cout<<endl<<"Your hand is now "<<pPoints<<" points."<<endl;
-                    end= pPoints >=21?true:false;
+                    cAce(pHand,pPoints,j);
+                    cout<<endl;
+                    value(pPoints, player);
+                    end= (pPoints >=21)?true:false;
                 }
             }
             
@@ -180,61 +137,20 @@ int main(int argc, char** argv) {
                     
 
                 }else{
-                    cout<<"You stand with a point total of "<<pPoints<<endl;
-                    cout<<"Dealer's face card is ";
-                    if (dHand[0]==':'){
-                        cout<<"10"<<endl;
-                    }else{
-                        cout<<dHand[0]<<endl;
-                    }
-                    cout<<"Dealer's hole card is ";
-                    if (dHand[1]==':'){
-                        cout<<"10"<<endl;
-                    }else{
-                        cout<<dHand[1]<<endl;
-                    }
-                    cout<<"Dealer's hand is worth "<<dPoints<<" points."<<endl;
+                    cout<<"You stand."<<endl;
+                    value(pPoints, player);
+                    face(dHand,0);
+                    face(dHand,1);
+                    value(dPoints, dealer);
                     for(int k =2;dPoints<17||dPoints<pPoints;k++){
                         dDraw=true;
-                        card = rand()%13+1;
-                        switch(card){
-                            case 11:{
-                                dPoints+=10;
-                                dHand[k]='J';
-                                cout<<"Dealer drew a Jack"<<endl;
-                                break;
-                            }
-                            case 12:{
-                                dPoints+=10;
-                                dHand[k]='Q';
-                                cout<<"Dealer drew a Queen"<<endl;
-                                break;
-                            }
-                            case 13:{
-                                dPoints+=10;
-                                dHand[k]='K';
-                                cout<<"Dealer drew a King"<<endl;
-                                break;
-                            }
-                            case 1:{
-                                dHand[k]='A';
-                                cout<<"Dealer drew an Ace"<<endl;
-                                dPoints +=1;
-                                break;
-                            }
-                            default:{
-                                dHand[k]=card+48;
-                                dPoints +=card;
-                                cout<<"Dealer drew a "<<card<<endl;
-                            }
-                        }
+                        deal(dPoints, dHand, k, dealer);
                         cout<<"Dealer's hand is ";
                         output(k+1,dHand);
-                        cout<<endl<<"Dealer's hand is worth "<<dPoints
-                                <<" points."<<endl;
+                        value(dPoints,dealer);
                         
                     }
-                    if(dPoints==21 and dDraw==false){
+                    if(dPoints==21 && dDraw==false){
                         cout<<"House has Blackjack"<<endl;
                         cout<<"You lost!"<<endl;
                         loss++;
@@ -244,14 +160,18 @@ int main(int argc, char** argv) {
                         cout<<"Your payout is $"<<bet*2<<endl;
                         win++;
                     }else if(pPoints > dPoints){
-                        cout<<"Dealer stands at "<<dPoints<<endl;
-                        cout<<"You won with "<<pPoints<<"!"<<endl;
+                        cout<<"Dealer stands."<<endl;
+                        value(dPoints,dealer);
+                        value(pPoints,player);
+                        cout<<"You won!"<<endl;
                         wallet+=bet*2;
                         cout<<"Your payout is $"<<bet*2<<endl;
                         win++;
                     }else if(dPoints > pPoints){
-                        cout<<"Dealer stands at "<<dPoints<<endl;
-                        cout<<"You lost with "<<pPoints<<"."<<endl;
+                        cout<<"Dealer stands."<<endl;
+                        value(dPoints,dealer);
+                        value(pPoints,player);
+                        cout<<"You lost :("<<endl;
                         loss++;
                     }else{
                         cout<<"Draw"<<endl;
@@ -261,6 +181,46 @@ int main(int argc, char** argv) {
                     }
                     end = true;
                 }
+            }else{
+                cout<<"You stand."<<endl;
+                value(pPoints, player);
+                face(dHand,0);
+                face(dHand,1);
+                value(dPoints,dealer);
+                for(int k =2;dPoints<17||dPoints<pPoints;k++){
+                    dDraw=true;
+                    deal(dPoints, dHand, k, dealer);
+                    cout<<"Dealer's hand is ";
+                    output(k+1,dHand);
+                    value(dPoints,dealer);
+
+                }
+                if (pPoints == 21 && j==2 && dPoints ==21 && dDraw ==false){
+                        cout<<"Draw!"<<endl;
+                        cout<<"You received back $"<<bet<<endl;
+                        wallet+=bet;
+                        draw++;
+                    }else if (dPoints == 21 && dDraw==false){
+                        cout<<"House has a Blackjack."<<endl;
+                        cout<<"You lost!"<<endl;
+                        loss++;
+                    }else if (pPoints == 21 && j==2){
+                        cout<<"BLACKJACK! You won!"<<endl;
+                        wallet+=bet+bet*1.5;
+                        cout<<"Your payout is $"<<bet+bet*1.5<<endl;
+                        win++;
+                    }else if(pPoints == 21 && dPoints == 21){                                    
+                        cout<<"Draw!"<<endl;
+                        wallet+=bet;
+                        cout<<"You received back $"<<bet<<endl;
+                        draw++;
+                    }else{
+                        cout<<"You Won!"<<endl;
+                        wallet+=bet*2;
+                        cout<<"Your payout is $"<<bet*2<<endl;
+                        win++;
+                    }
+                
             }
         
         }        
@@ -300,7 +260,7 @@ void bett(float& bet, float& wallet){
 }
 
 //initial deal of cards
-void ideal(unsigned short& p,unsigned short& d, char pHand[], char dHand[]){
+void deal(unsigned short& p,unsigned short& d, char pHand[], char dHand[]){
     char yes;
     for (int i =0; i<2; i++){
         unsigned short card = rand()%13+1;
@@ -392,6 +352,7 @@ void output(int j, char hand[]){
             cout<<hand[i]<<" ";
         }
     }
+    cout<<endl;
 }
 //deals a card
 void deal(unsigned short& p, char hand[], int i, char who){
@@ -479,7 +440,7 @@ bool ace(char hand[], int j){
         }
     }
 }
-
+//sorts hand
 void sort(char hand[], int size){
 
     for(int i = 0; i < size; i++){
@@ -493,7 +454,7 @@ void sort(char hand[], int size){
         
     }
 }
-
+//converts char to int
 int cValue(char c){
     if (c == 'A'){
         return 1;
@@ -509,5 +470,70 @@ int cValue(char c){
     }
     else{
         return c-48;
+    }
+}
+//resets to starting values
+void reset(unsigned short& p, unsigned short& d, bool& end, bool& dDraw){
+    p = 0;
+    d = 0;
+    end=false;
+    dDraw=false;
+}
+//outputs dealer's face card or hole card
+void face(char d[], int i ){
+    if(i==0){
+        cout<<"Dealer's face card is ";
+        if (d[i]==':'){
+            cout<<"10"<<endl;
+        }else{
+            cout<<d[i]<<endl;
+        }
+    }else{
+        cout<<"Dealer's hole card is ";
+            if (d[i]==':'){
+                cout<<"10"<<endl;
+            }else{
+                cout<<d[i]<<endl;
+            }
+    }
+    
+}
+//outputs point value of hand
+void value(unsigned short p, char c){
+    if(c == 'p'){
+        cout<<"Your point total is "<<p<<endl;
+    }
+    else{
+        cout<<"Dealer's hand is worth "<<p<<" points."<<endl;
+    }
+}
+
+void cAce (char hand[], unsigned short& points, int j){
+    points = 0;
+    char yes;
+    for(int i = 0; i<j;i++){
+        switch(hand[i]){
+            case'J':{
+            points+=10;
+            break;
+        }
+            case'Q':{
+            points+=10;
+            break;
+        }
+            case'K':{
+            points+=10;
+            break;
+        }
+            case'A':{
+            cout<<"Do you want the Ace to be 11 (y,n)?"<<endl;
+            cin>>yes;
+            points += (tolower(yes) =='y')?11:1;
+            break;
+        }
+            default:{
+            points +=hand[i]-48;
+        }
+        }
     }
 }
